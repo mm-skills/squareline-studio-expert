@@ -1,0 +1,484 @@
+==========================================================================================
+WIDGET TYPES AND THEIR SPECIFIC PROPERTIES
+==========================================================================================
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  ARC  (instances: Arc1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    ARC/Arc                                       IT=1   val=
+    ARC/Bg_angles                                 IT=7   val=[120, 60]
+    ARC/Mode                                      IT=3   val=NORMAL
+    ARC/Range                                     IT=7   val=[0, 100]
+    ARC/Rotation                                  IT=6   val=
+    ARC/Style_indicator                           IT=11  val=lv.PART.INDICATOR, Rectangle, Pad, Arc  part=lv.PART.INDICATOR
+    ARC/Style_knob                                IT=11  val=lv.PART.KNOB, Rectangle, Pad  part=lv.PART.KNOB
+    ARC/Style_main                                IT=11  val=lv.PART.MAIN, Rectangle, Pad, Arc, Transform  part=lv.PART.MAIN
+    ARC/Value                                     IT=6   val=50
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  BAR  (instances: Bar1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    BAR/Bar                                       IT=1   val=
+    BAR/Mode                                      IT=3   val=NORMAL
+    BAR/Range                                     IT=7   val=[0, 100]
+    BAR/Style_indicator                           IT=11  val=lv.PART.INDICATOR, Rectangle  part=lv.PART.INDICATOR
+    BAR/Style_main                                IT=11  val=lv.PART.MAIN, Rectangle, Pad, Anim1, Transform  part=lv.PART.MAIN
+    BAR/Value                                     IT=6   val=25
+    BAR/Value_start                               IT=6   val=
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  BUTTON  (instances: Button1, Button2)
+──────────────────────────────────────────────────────────────────────────────────────────
+    BUTTON/Style_main                             IT=11  val=lv.PART.MAIN, Rectangle, Pad, Text, Transform  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  CALENDAR  (instances: Calendar1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    CALENDAR/Date                                 IT=7   val=[1, 1, 2021]
+    CALENDAR/Style_items                          IT=11  val=lv.PART.ITEMS, Rectangle, Pad  part=lv.PART.ITEMS
+    CALENDAR/Style_main                           IT=11  val=lv.PART.MAIN, Rectangle, Pad, Transform  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  CHART  (instances: Chart1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    CHART/Chart                                   IT=1   val=
+    CHART/ChartData                               IT=12  val=[{"Axis":0,"Color":[128,128,128,255],"Series":[0,10,20,40,80
+    CHART/Chart_data                              IT=1   val=
+    CHART/Chart_type                              IT=3   val=LINE
+    CHART/Division_lines                          IT=7   val=[3, 5]
+    CHART/Font_size_on_Primary_Y_axis             IT=6   val=50
+    CHART/Font_size_on_Secondary_Y_axis           IT=6   val=25
+    CHART/Font_size_on_X_axis                     IT=6   val=50
+    CHART/Labels_on_Primary_Y_axis                IT=2   val=True
+    CHART/Labels_on_Secondary_Y_axis              IT=2   val=True
+    CHART/Labels_on_X_axis                        IT=2   val=True
+    CHART/Number_of_points                        IT=6   val=10
+    CHART/PrimaryYMajor                           IT=7   val=[10, 5]
+    CHART/PrimaryYMinor                           IT=7   val=[5, 2]
+    CHART/Primary_Y_Axis                          IT=1   val=
+    CHART/Primary_Y_range                         IT=7   val=[0, 100]
+    CHART/SecondaryYMajor                         IT=7   val=[10, 5]
+    CHART/SecondaryYMinor                         IT=7   val=[5, 2]
+    CHART/Secondary_Y_Axis                        IT=1   val=
+    CHART/Secondary_Y_range                       IT=7   val=[0, 100]
+    CHART/Style_bg                                IT=11  val=lv.PART.MAIN, Rectangle, Line, Pad, Transform  part=lv.PART.MAIN
+    CHART/Style_indicator                         IT=11  val=lv.PART.INDICATOR, Rectangle, Pad, Size  part=lv.PART.INDICATOR
+    CHART/Style_items                             IT=11  val=lv.PART.ITEMS, Line, Pad  part=lv.PART.ITEMS
+    CHART/Style_scrollbar                         IT=11  val=lv.PART.SCROLLBAR, Rectangle, Pad  part=lv.PART.SCROLLBAR
+    CHART/Style_ticks                             IT=11  val=lv.PART.TICKS, Line, Text  part=lv.PART.TICKS
+    CHART/XMajor                                  IT=7   val=[10, 5]
+    CHART/XMinor                                  IT=7   val=[5, 2]
+    CHART/X_Axis                                  IT=1   val=
+    CHART/Zoom                                    IT=7   val=[256, 256]
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  CHECKBOX  (instances: Checkbox1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    CHECKBOX/Checkbox                             IT=1   val=
+    CHECKBOX/Style_bullet                         IT=11  val=lv.PART.INDICATOR, Rectangle, Pad  part=lv.PART.INDICATOR
+    CHECKBOX/Style_main                           IT=11  val=lv.PART.MAIN, Text, Transform  part=lv.PART.MAIN
+    CHECKBOX/Title                                IT=10  val=Checkbox
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  COLORWHEEL  (instances: Colorwheel1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    COLORWHEEL/Fixed_mode                         IT=2   val=False
+    COLORWHEEL/Mode                               IT=3   val=HUE
+    COLORWHEEL/Style_knob                         IT=11  val=lv.PART.KNOB, Rectangle, Pad  part=lv.PART.KNOB
+    COLORWHEEL/Style_main                         IT=11  val=lv.PART.MAIN, Rectangle, Pad, Arc, Transform  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  DROPDOWN  (instances: Dropdown1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    DROPDOWN/Base_text                            IT=10  val=
+    DROPDOWN/Dropdown                             IT=1   val=
+    DROPDOWN/List_align                           IT=3   val=BOTTOM
+    DROPDOWN/Options                              IT=10  val=Option 1\nOption 2\nOption 3
+    DROPDOWN/Show_selected                        IT=2   val=True
+    DROPDOWN/Style_indicator                      IT=11  val=lv.PART.INDICATOR, Text  part=lv.PART.INDICATOR
+    DROPDOWN/Style_list_main                      IT=11  val={"python":"{0}.get_list()","c":"lv_dropdown_get_list({0})"}   part= lv.PART.MAIN
+    DROPDOWN/Style_list_scrollbar                 IT=11  val={"python":"{0}.get_list()","c":"lv_dropdown_get_list({0})"}   part= lv.PART.SCROLLBAR
+    DROPDOWN/Style_list_selected                  IT=11  val={"python":"{0}.get_list()","c":"lv_dropdown_get_list({0})"}   part= lv.PART.SELECTED
+    DROPDOWN/Style_main                           IT=11  val=lv.PART.MAIN, Text, Rectangle, Pad, Transform  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  IMAGE  (instances: Image1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    IMAGE/Asset                                   IT=5   val=
+    IMAGE/Image                                   IT=1   val=
+    IMAGE/Pivot                                   IT=7   val=[0, 0]
+    IMAGE/Rotation                                IT=6   val=
+    IMAGE/Scale                                   IT=6   val=256
+    IMAGE/Style_main                              IT=11  val=lv.PART.MAIN, Rectangle, Image, Transform, Pad  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  IMGBUTTON  (instances: ImgButton1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    IMGBUTTON/Button_state                        IT=3   val=RELEASED
+    IMGBUTTON/Image_checked_disabled              IT=5   val=
+    IMGBUTTON/Image_checked_pressed               IT=5   val=
+    IMGBUTTON/Image_checked_released              IT=5   val=
+    IMGBUTTON/Image_disabled                      IT=5   val=
+    IMGBUTTON/Image_pressed                       IT=5   val=
+    IMGBUTTON/Image_released                      IT=5   val=
+    IMGBUTTON/Images                              IT=1   val=
+    IMGBUTTON/Style_main                          IT=11  val=lv.PART.MAIN, Rectangle, Image, Text, Transform  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  KEYBOARD  (instances: Keyboard1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    KEYBOARD/Mode                                 IT=3   val=TEXT_LOWER
+    KEYBOARD/Style_items                          IT=11  val=lv.PART.ITEMS, Rectangle, Pad, Text  part=lv.PART.ITEMS
+    KEYBOARD/Style_main                           IT=11  val=lv.PART.MAIN, Rectangle, Pad, Transform  part=lv.PART.MAIN
+    KEYBOARD/Target_textarea                      IT=9   val=-
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  LABEL  (instances: Label1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    LABEL/Label                                   IT=1   val=
+    LABEL/Long_mode                               IT=3   val=WRAP
+    LABEL/Recolor                                 IT=2   val=False
+    LABEL/Style_main                              IT=11  val=lv.PART.MAIN, Text, Rectangle, Pad, Transform  part=lv.PART.MAIN
+    LABEL/Text                                    IT=10  val=Label
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  PANEL  (instances: Panel1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    PANEL/Style_main                              IT=11  val=lv.PART.MAIN, Rectangle, Pad, Text, Transform  part=lv.PART.MAIN
+    PANEL/Style_scrollbar                         IT=11  val=lv.PART.SCROLLBAR, Rectangle, Pad  part=lv.PART.SCROLLBAR
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  ROLLER  (instances: Roller1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    ROLLER/Mode                                   IT=3   val=NORMAL
+    ROLLER/Options                                IT=10  val=Option 1\nOption 2\nOption 3
+    ROLLER/Roller                                 IT=1   val=
+    ROLLER/Selected                               IT=6   val=
+    ROLLER/Style_main                             IT=11  val=lv.PART.MAIN, Text, Rectangle, Pad, Transform  part=lv.PART.MAIN
+    ROLLER/Style_selected                         IT=11  val=lv.PART.SELECTED, Text, Rectangle  part=lv.PART.SELECTED
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  SCREEN  (instances: Screen1, Screen2)
+──────────────────────────────────────────────────────────────────────────────────────────
+    SCREEN/Screen                                 IT=1   val=
+    SCREEN/Style_main                             IT=11  val=lv.PART.MAIN, Rectangle, Pad, Text  part=lv.PART.MAIN
+    SCREEN/Style_scrollbar                        IT=11  val=lv.PART.SCROLLBAR, Rectangle, Pad  part=lv.PART.SCROLLBAR
+    SCREEN/Temporary                              IT=2   val=False
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  SLIDER  (instances: Slider1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    SLIDER/Mode                                   IT=3   val=NORMAL
+    SLIDER/Range                                  IT=7   val=[0, 100]
+    SLIDER/Slider                                 IT=1   val=
+    SLIDER/Style_indicator                        IT=11  val=lv.PART.INDICATOR, Rectangle  part=lv.PART.INDICATOR
+    SLIDER/Style_knob                             IT=11  val=lv.PART.KNOB, Rectangle, Pad  part=lv.PART.KNOB
+    SLIDER/Style_main                             IT=11  val=lv.PART.MAIN, Rectangle, Pad, Transform  part=lv.PART.MAIN
+    SLIDER/Value                                  IT=6   val=
+    SLIDER/Value_left                             IT=6   val=
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  SPINBOX  (instances: Spinbox1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    SPINBOX/Digit_format                          IT=7   val=[4, 2]
+    SPINBOX/Range                                 IT=7   val=[0, 9999, 1]
+    SPINBOX/Spinbox                               IT=1   val=
+    SPINBOX/Style_cursor                          IT=11  val=lv.PART.CURSOR, Rectangle, Text  part=lv.PART.CURSOR
+    SPINBOX/Style_main                            IT=11  val=lv.PART.MAIN, Rectangle, Pad, Text, Transform  part=lv.PART.MAIN
+    SPINBOX/Value                                 IT=6   val=
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  SPINNER  (instances: Spinner1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    SPINNER/Spinner                               IT=1   val=
+    SPINNER/Style_indicator                       IT=11  val=lv.PART.INDICATOR, Arc  part=lv.PART.INDICATOR
+    SPINNER/Style_main                            IT=11  val=lv.PART.MAIN, Rectangle, Arc, Pad, Transform  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  STARTEVENTS  (instances: )
+──────────────────────────────────────────────────────────────────────────────────────────
+    STARTEVENTS/Name                              IT=10  val=___initial_actions0
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  SWITCH  (instances: Switch1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    SWITCH/Style_indicator                        IT=11  val=lv.PART.INDICATOR, Rectangle  part=lv.PART.INDICATOR
+    SWITCH/Style_knob                             IT=11  val=lv.PART.KNOB, Rectangle, Pad  part=lv.PART.KNOB
+    SWITCH/Style_main                             IT=11  val=lv.PART.MAIN, Rectangle, Pad, Anim1, Transform  part=lv.PART.MAIN
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  TABPAGE  (instances: , , )
+──────────────────────────────────────────────────────────────────────────────────────────
+    TABPAGE/Adv_hittest                           IT=2   val=False
+    TABPAGE/Checkable                             IT=2   val=False
+    TABPAGE/Checked                               IT=2   val=False
+    TABPAGE/Click_focusable                       IT=2   val=True
+    TABPAGE/Clickable                             IT=2   val=True
+    TABPAGE/Disabled                              IT=2   val=False
+    TABPAGE/Event_bubble                          IT=2   val=False
+    TABPAGE/Flags                                 IT=1   val=
+    TABPAGE/Flex_in_new_track                     IT=2   val=False
+    TABPAGE/Floating                              IT=2   val=False
+    TABPAGE/Focused                               IT=2   val=False
+    TABPAGE/Gesture_bubble                        IT=2   val=True
+    TABPAGE/Hidden                                IT=2   val=False
+    TABPAGE/Ignore_layout                         IT=2   val=False
+    TABPAGE/Layout                                IT=1   val=
+    TABPAGE/Layout_type                           IT=13  val=No_layout
+    TABPAGE/Name                                  IT=10  val=TabPage1
+    TABPAGE/Overflow_visible                      IT=2   val=False
+    TABPAGE/Press_lock                            IT=2   val=True
+    TABPAGE/Pressed                               IT=2   val=False
+    TABPAGE/Scroll_chain                          IT=2   val=True
+    TABPAGE/Scroll_direction                      IT=3   val=ALL
+    TABPAGE/Scroll_elastic                        IT=2   val=True
+    TABPAGE/Scroll_momentum                       IT=2   val=True
+    TABPAGE/Scroll_on_focus                       IT=2   val=False
+    TABPAGE/Scroll_one                            IT=2   val=False
+    TABPAGE/Scroll_with_arrow                     IT=2   val=False
+    TABPAGE/Scrollable                            IT=2   val=True
+    TABPAGE/Scrollbar_mode                        IT=3   val=AUTO
+    TABPAGE/Snappable                             IT=2   val=True
+    TABPAGE/States                                IT=1   val=
+    TABPAGE/Style_main                            IT=11  val=lv.PART.MAIN, Rectangle, Pad, Text, Transform  part=lv.PART.MAIN
+    TABPAGE/Style_scrollbar                       IT=11  val=lv.PART.SCROLLBAR, Rectangle, Pad  part=lv.PART.SCROLLBAR
+    TABPAGE/TabPage                               IT=1   val=
+    TABPAGE/Title                                 IT=10  val=Title 1
+    TABPAGE/User_1                                IT=2   val=False
+    TABPAGE/User_2                                IT=2   val=False
+    TABPAGE/User_3                                IT=2   val=False
+    TABPAGE/User_4                                IT=2   val=False
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  TABVIEW  (instances: TabView1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    TABVIEW/Children                              IT=15  val=
+    TABVIEW/Style_buttons_items                   IT=11  val={"python":"{0}.get_tab_btns()","c":"lv_tabview_get_tab_btns(  part= lv.PART.ITEMS
+    TABVIEW/Style_buttons_main                    IT=11  val={"python":"{0}.get_tab_btns()","c":"lv_tabview_get_tab_btns(  part= lv.PART.MAIN
+    TABVIEW/Style_main                            IT=11  val=lv.PART.MAIN, Rectangle, Pad, Text, Transform  part=lv.PART.MAIN
+    TABVIEW/Tab_position                          IT=3   val=TOP
+    TABVIEW/Tab_size                              IT=6   val=50
+    TABVIEW/Tabpages                              IT=1   val=
+    TABVIEW/Tabview                               IT=1   val=
+
+──────────────────────────────────────────────────────────────────────────────────────────
+  TEXTAREA  (instances: TextArea1)
+──────────────────────────────────────────────────────────────────────────────────────────
+    TEXTAREA/Accepted_characters                  IT=10  val=
+    TEXTAREA/Max_text_length                      IT=6   val=98989898
+    TEXTAREA/One_line_mode                        IT=2   val=False
+    TEXTAREA/Password_mode                        IT=2   val=False
+    TEXTAREA/Placeholder                          IT=10  val=Placeholder...
+    TEXTAREA/Style_cursor                         IT=11  val=lv.PART.CURSOR, Text, Rectangle  part=lv.PART.CURSOR
+    TEXTAREA/Style_main                           IT=11  val=lv.PART.MAIN, Text, Rectangle, Pad, Transform  part=lv.PART.MAIN
+    TEXTAREA/Style_placeholder                    IT=11  val=lv.PART_TEXTAREA.PLACEHOLDER, Text  part=lv.PART_TEXTAREA.PLACEHOLDER
+    TEXTAREA/Style_selected                       IT=11  val=lv.PART.SELECTED, Text, Rectangle  part=lv.PART.SELECTED
+    TEXTAREA/Text                                 IT=10  val=
+    TEXTAREA/TextArea                             IT=1   val=
+
+
+==========================================================================================
+ALL UNIQUE STRTYPES (202 total)
+==========================================================================================
+  ARC/Arc
+  ARC/Bg_angles
+  ARC/Mode
+  ARC/Range
+  ARC/Rotation
+  ARC/Style_indicator
+  ARC/Style_knob
+  ARC/Style_main
+  ARC/Value
+  BAR/Bar
+  BAR/Mode
+  BAR/Range
+  BAR/Style_indicator
+  BAR/Style_main
+  BAR/Value
+  BAR/Value_start
+  BUTTON/Style_main
+  CALENDAR/Date
+  CALENDAR/Style_items
+  CALENDAR/Style_main
+  CHART/Chart
+  CHART/ChartData
+  CHART/Chart_data
+  CHART/Chart_type
+  CHART/Division_lines
+  CHART/Font_size_on_Primary_Y_axis
+  CHART/Font_size_on_Secondary_Y_axis
+  CHART/Font_size_on_X_axis
+  CHART/Labels_on_Primary_Y_axis
+  CHART/Labels_on_Secondary_Y_axis
+  CHART/Labels_on_X_axis
+  CHART/Number_of_points
+  CHART/PrimaryYMajor
+  CHART/PrimaryYMinor
+  CHART/Primary_Y_Axis
+  CHART/Primary_Y_range
+  CHART/SecondaryYMajor
+  CHART/SecondaryYMinor
+  CHART/Secondary_Y_Axis
+  CHART/Secondary_Y_range
+  CHART/Style_bg
+  CHART/Style_indicator
+  CHART/Style_items
+  CHART/Style_scrollbar
+  CHART/Style_ticks
+  CHART/XMajor
+  CHART/XMinor
+  CHART/X_Axis
+  CHART/Zoom
+  CHECKBOX/Checkbox
+  CHECKBOX/Style_bullet
+  CHECKBOX/Style_main
+  CHECKBOX/Title
+  COLORWHEEL/Fixed_mode
+  COLORWHEEL/Mode
+  COLORWHEEL/Style_knob
+  COLORWHEEL/Style_main
+  DROPDOWN/Base_text
+  DROPDOWN/Dropdown
+  DROPDOWN/List_align
+  DROPDOWN/Options
+  DROPDOWN/Show_selected
+  DROPDOWN/Style_indicator
+  DROPDOWN/Style_list_main
+  DROPDOWN/Style_list_scrollbar
+  DROPDOWN/Style_list_selected
+  DROPDOWN/Style_main
+  IMAGE/Asset
+  IMAGE/Image
+  IMAGE/Pivot
+  IMAGE/Rotation
+  IMAGE/Scale
+  IMAGE/Style_main
+  IMGBUTTON/Button_state
+  IMGBUTTON/Image_checked_disabled
+  IMGBUTTON/Image_checked_pressed
+  IMGBUTTON/Image_checked_released
+  IMGBUTTON/Image_disabled
+  IMGBUTTON/Image_pressed
+  IMGBUTTON/Image_released
+  IMGBUTTON/Images
+  IMGBUTTON/Style_main
+  KEYBOARD/Mode
+  KEYBOARD/Style_items
+  KEYBOARD/Style_main
+  KEYBOARD/Target_textarea
+  LABEL/Label
+  LABEL/Long_mode
+  LABEL/Recolor
+  LABEL/Style_main
+  LABEL/Text
+  OBJECT/Adv_hittest
+  OBJECT/Align
+  OBJECT/Clickable
+  OBJECT/Extend_click_area
+  OBJECT/Flags
+  OBJECT/Layout
+  OBJECT/Layout_type
+  OBJECT/Name
+  OBJECT/Position
+  OBJECT/Scroll_direction
+  OBJECT/Scroll_on_focus
+  OBJECT/Scroll_snap_x
+  OBJECT/Scroll_snap_y
+  OBJECT/Scrollable
+  OBJECT/Scrollbar_mode
+  OBJECT/Scrolling
+  OBJECT/Size
+  OBJECT/States
+  OBJECT/Transform
+  PANEL/Style_main
+  PANEL/Style_scrollbar
+  ROLLER/Mode
+  ROLLER/Options
+  ROLLER/Roller
+  ROLLER/Selected
+  ROLLER/Style_main
+  ROLLER/Style_selected
+  SCREEN/Screen
+  SCREEN/Style_main
+  SCREEN/Style_scrollbar
+  SCREEN/Temporary
+  SLIDER/Mode
+  SLIDER/Range
+  SLIDER/Slider
+  SLIDER/Style_indicator
+  SLIDER/Style_knob
+  SLIDER/Style_main
+  SLIDER/Value
+  SLIDER/Value_left
+  SPINBOX/Digit_format
+  SPINBOX/Range
+  SPINBOX/Spinbox
+  SPINBOX/Style_cursor
+  SPINBOX/Style_main
+  SPINBOX/Value
+  SPINNER/Spinner
+  SPINNER/Style_indicator
+  SPINNER/Style_main
+  STARTEVENTS/Name
+  SWITCH/Style_indicator
+  SWITCH/Style_knob
+  SWITCH/Style_main
+  TABPAGE/Adv_hittest
+  TABPAGE/Checkable
+  TABPAGE/Checked
+  TABPAGE/Click_focusable
+  TABPAGE/Clickable
+  TABPAGE/Disabled
+  TABPAGE/Event_bubble
+  TABPAGE/Flags
+  TABPAGE/Flex_in_new_track
+  TABPAGE/Floating
+  TABPAGE/Focused
+  TABPAGE/Gesture_bubble
+  TABPAGE/Hidden
+  TABPAGE/Ignore_layout
+  TABPAGE/Layout
+  TABPAGE/Layout_type
+  TABPAGE/Name
+  TABPAGE/Overflow_visible
+  TABPAGE/Press_lock
+  TABPAGE/Pressed
+  TABPAGE/Scroll_chain
+  TABPAGE/Scroll_direction
+  TABPAGE/Scroll_elastic
+  TABPAGE/Scroll_momentum
+  TABPAGE/Scroll_on_focus
+  TABPAGE/Scroll_one
+  TABPAGE/Scroll_with_arrow
+  TABPAGE/Scrollable
+  TABPAGE/Scrollbar_mode
+  TABPAGE/Snappable
+  TABPAGE/States
+  TABPAGE/Style_main
+  TABPAGE/Style_scrollbar
+  TABPAGE/TabPage
+  TABPAGE/Title
+  TABPAGE/User_1
+  TABPAGE/User_2
+  TABPAGE/User_3
+  TABPAGE/User_4
+  TABVIEW/Children
+  TABVIEW/Style_buttons_items
+  TABVIEW/Style_buttons_main
+  TABVIEW/Style_main
+  TABVIEW/Tab_position
+  TABVIEW/Tab_size
+  TABVIEW/Tabpages
+  TABVIEW/Tabview
+  TEXTAREA/Accepted_characters
+  TEXTAREA/Max_text_length
+  TEXTAREA/One_line_mode
+  TEXTAREA/Password_mode
+  TEXTAREA/Placeholder
+  TEXTAREA/Style_cursor
+  TEXTAREA/Style_main
+  TEXTAREA/Style_placeholder
+  TEXTAREA/Style_selected
+  TEXTAREA/Text
+  TEXTAREA/TextArea
+  _event/EventHandler

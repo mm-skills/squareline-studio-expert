@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# SLS editor cache and backups (large binary blobs)
+research/*/cache/
+research/*/backup/
+research/*/.slp
