@@ -118,7 +118,7 @@ All confirmed from `research/new01/` (v1.6.1).
 | `DROPDOWN/Base_text` | 10 | Static text (overrides selected display) |
 | `DROPDOWN/Show_selected` | 2 | Show selected option |
 | `DROPDOWN/List_align` | 3 | `"BOTTOM"`, `"TOP"`, `"LEFT"`, `"RIGHT"` |
-| **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_list_main` (list MAIN), `Style_list_scrollbar` (list SCROLLBAR), `Style_list_selected` (list SELECTED) |
+| **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_list_main` (list MAIN), `Style_list_selected` (list SELECTED) |
 
 ### ROLLER
 | strtype | IT | Description |
