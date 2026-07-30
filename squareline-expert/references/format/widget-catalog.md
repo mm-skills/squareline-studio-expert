@@ -227,3 +227,13 @@ All confirmed from `research/new01/` (v1.6.1).
 | `TABPAGE/Name` | 10 | Widget name |
 | **Note:** TABPAGE uses its own prefix for ALL properties (not OBJECT/) including Flags, States, Scrollable, etc. Full flag set: `Clickable`, `Click_focusable`, `Checkable`, `Checked`, `Disabled`, `Focused`, `Pressed`, `Hidden`, `Floating`, `Adv_hittest`, `Press_lock`, `Snappable`, `Event_bubble`, `Gesture_bubble`, `Scroll_elastic`, `Scroll_momentum`, `Scroll_one`, `Scroll_chain`, `Scroll_on_focus`, `Scroll_with_arrow`, `Ignore_layout`, `Overflow_visible`, `Flex_in_new_track`, `User_1..4` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_scrollbar` (SCROLLBAR) |
+
+## IMAGE Asset Requirements
+
+- Supported format: PNG with alpha channel is the standard (all SLS examples use PNG)
+- Directory convention: All assets go in `assets/` at the project root, referenced by relative path (`assets/filename.png`)
+- Naming convention: Lowercase, underscores, descriptive (e.g., `icon_battery.png`, `bg_main.png`)
+- Recommended icon sizes: 16, 24, 32, 48px for common UI icons on embedded displays
+- Recoloring: Monochrome/white icons can be tinted via LVGL style properties (`_style/Bg_Image_Recolor`) — use white source PNGs for maximum flexibility
+- Flash/RAM cost: Each pixel costs 2–4 bytes depending on colour depth; a 48×48 RGBA icon ≈ 9 KB. Budget carefully on constrained devices
+- IMAGE widget properties quick reference from the catalog above: `IMAGE/Asset` (path, IT=5), `IMAGE/Pivot` (rotation pivot [x,y], IT=7), `IMAGE/Rotation` (0.1° units, IT=6), `IMAGE/Scale` (256 = 100%, IT=6)

@@ -90,17 +90,36 @@ from these strings, and real newlines cause `SyntaxError: invalid syntax`.
 ❌ "Option 1\nOption 2\nOption 3"     ← BREAKS SLS code generation
 ```
 
+### 12. Free-tier projects have strict size limits
+The Personal (free) license enforces hard limits: **max 10 screens, 150 widgets,
+1 component, 5 global colors, 2 themes**. Exceeding these will cause SLS to refuse
+to save the project. Always confirm the user's license tier before generating, and
+default to free-tier limits unless told otherwise.
+→ Read `references/licensing-limitations.md` for full details and budgeting strategies.
+
+### 13. Only even Montserrat sizes 8–48 are built-in
+SLS ships 21 built-in Montserrat font sizes: **8, 10, 12, 14, 16, 18, 20, 22, 24,
+26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48** — even numbers only. Referencing
+`montserrat_56` or `montserrat_13` will produce a "Font is missing" warning. Any
+size outside this range requires SLS Font Manager generation.
+→ Read `references/format/fonts.md` for the complete font reference.
+
 ---
 
 ## Core Workflow
 
 ### Step 1: Understand Requirements
 Before generating, establish:
+- **License tier**: Personal (free), Small Business, Business, or Enterprise?
+  Default to **Personal (free)** unless the user specifies otherwise.
 - **Display**: Resolution (width × height), shape (RECTANGLE/CIRCLE), color depth
 - **Board**: Target hardware (e.g., "ESP32S335D - MaTouch 3.5-inch")
 - **Screens**: How many screens, navigation flow between them
 - **Widgets**: What UI elements on each screen
 - **Interactions**: Touch events, value changes, screen transitions
+
+If using the **free tier**, apply project size constraints from the start:
+→ Read `references/licensing-limitations.md` for limits and widget budgeting.
 
 ### Step 2: Load Target Board Config
 → Read `references/targets/` for board-specific settings.
@@ -121,24 +140,21 @@ Option B: Build JSON manually using the structure reference.
 → Read `references/format/project-structure.md`
 
 ### Step 4: Add Widgets
-For each screen, add the required widgets as children.
+**Preferred:** Use `scripts/widget_helpers.py` for programmatic widget construction:
+```python
+from widget_helpers import WidgetBuilder
+wb = WidgetBuilder()
+label = wb.label("title", text="Hello", font="montserrat_24", align="CENTER")
+button = wb.button("save", text="Save", size=(120, 48),
+                   on_click=wb.call_function("on_save"))
+wb.add_children(screen, [label, button])
+```
+The helper handles GUID generation, nidcnt tracking, all 16 mandatory base
+properties, style quirks, and event templates automatically.
+
+**Manual alternative:** Build JSON by hand using the reference docs.
 → Read `references/format/widget-catalog.md` for widget properties and defaults.
 → Read `references/widgets/` for detailed widget-group guidance.
-
-Every widget needs at minimum:
-```json
-{
-  "guid": "GUID<unique>",
-  "properties": [
-    { "nid": 10, "strtype": "OBJECT/Name", "strval": "MyWidget", "InheritedType": 10 },
-    { "nid": 20, "strtype": "OBJECT/Layout", "InheritedType": 1 },
-    // ... layout_type, transform, position, size, align, flags, scrolling, states
-    // ... widget-specific properties (e.g., SLIDER/Range, LABEL/Text)
-    // ... style parts (e.g., BUTTON/Style_main)
-  ],
-  "saved_objtypeKey": "BUTTON"
-}
-```
 
 ### Step 5: Wire Events
 Add event handlers to widget properties arrays.
@@ -177,6 +193,12 @@ python3 scripts/validate_project.py /path/to/output/
 | Layout patterns for rectangular displays | `references/ux/rectangular-display-patterns.md` |
 | Plan screen navigation and flow | `references/ux/screen-flow-patterns.md` |
 | Build a common UI component (thermostat, settings, etc.) | `references/ux/widget-recipes.md` |
+| Check license tier limits and widget budgets | `references/licensing-limitations.md` |
+| Check available fonts or add custom fonts | `references/format/fonts.md` |
+| Find image assets for a project | `references/format/image-asset-sources.md` |
+| Build widgets programmatically with a helper API | `scripts/widget_helpers.py` |
+| Report a bug or defect in the skill | `references/issue-management.md` |
+| Contribute a fix or propose an enhancement | `references/contribution-protocol.md` |
 
 ---
 
@@ -222,6 +244,11 @@ Before delivering generated project files, verify:
 - [ ] Color arrays have correct length (4 for RGBA, 3 for gradient)
 - [ ] `.sll` `width`/`height` match the target display resolution
 - [ ] v1.6+: `.spj` `info` block mirrors `.sll` metadata
+- [ ] Free tier: total screens ≤ 10
+- [ ] Free tier: total widgets ≤ 150
+- [ ] Free tier: components ≤ 1
+- [ ] Free tier: global colors ≤ 5
+- [ ] Free tier: themes ≤ 2
 
 ---
 
