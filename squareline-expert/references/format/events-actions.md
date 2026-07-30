@@ -184,9 +184,9 @@ Parameters: Target label (IT=9), Source arc (IT=9).
 Sets a label's text to a slider's current value.
 Parameters: Target label (IT=9), Source slider (IT=9).
 
-#### SET TEXT VALUE FROM SWITCH
-Sets a label's text based on a switch's state.
-Parameters: Target label (IT=9), Source switch (IT=9), On text (IT=10), Off text (IT=10).
+#### SET TEXT VALUE WHEN CHECKED
+Sets a label's text based on whether the source widget is in checked state.
+Parameters: Target label (IT=9), Checked text (IT=10), Unchecked text (IT=10).
 
 #### Property-Setting Actions
 
@@ -202,7 +202,7 @@ These follow the same pattern as LABEL_PROPERTY but for other widget types:
 | `ROLLER_PROPERTY` | ROLLER | Selected index |
 | `SLIDER_PROPERTY` | SLIDER | Value |
 
-#### Complete Action Summary (24 actions)
+#### Complete Action Summary (24 user-facing actions)
 
 | Category | Actions | Confirmed |
 |----------|--------|:---:|
@@ -211,7 +211,7 @@ These follow the same pattern as LABEL_PROPERTY but for other widget types:
 | Animation | PLAY ANIMATION, SET OPACITY | ✅, ✅ |
 | Value Increment | INCREMENT ARC, INCREMENT BAR, INCREMENT SLIDER | ✅, —, — |
 | Property Setting | LABEL_PROPERTY, SLIDER_PROPERTY, BAR_PROPERTY, DROPDOWN_PROPERTY, IMAGE_PROPERTY, ROLLER_PROPERTY, BASIC_PROPERTY | ✅, ✅, — |
-| Text Display | SET TEXT VALUE FROM ARC, SET TEXT VALUE FROM SLIDER, SET TEXT VALUE FROM SWITCH | ✅, ✅, — |
+| Text Display | SET TEXT VALUE FROM ARC, SET TEXT VALUE FROM SLIDER, SET TEXT VALUE WHEN CHECKED | ✅, ✅, ✅ |
 | State/Flag | MODIFY FLAG, MODIFY STATE | ✅, ✅ |
 | Keyboard | KEYBOARD SET TARGET, MOVE CURSOR | —, — |
 | Other | STEP SPINBOX, SWITCH THEME | —, — |

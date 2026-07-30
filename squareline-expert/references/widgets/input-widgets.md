@@ -81,7 +81,6 @@
 - `Style_main` (MAIN): The closed dropdown button.
 - `Style_indicator` (INDICATOR): The drop-down arrow icon.
 - `Style_list_main` (list MAIN): The background of the opened list.
-- `Style_list_scrollbar` (list SCROLLBAR): The scrollbar of the list.
 - `Style_list_selected` (list SELECTED): The currently selected list item.
 **Common gotchas:** Options MUST be separated by a literal `\n` string (e.g., `\\n` in JSON), NOT an actual newline character.
 

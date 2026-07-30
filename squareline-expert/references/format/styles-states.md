@@ -31,9 +31,11 @@ be set on any part.
 
 | Widget | Parts | Notes |
 |--------|-------|-------|
-| SCREEN | `main` | Background only |
+| SCREEN | `main`, `scrollbar` | Background and scrollbar |
 | PANEL | `main`, `scrollbar` | Main has full 31 properties |
+| CONTAINER | `main`, `scrollbar` | Like PANEL |
 | BUTTON | `main` | Bg, border, shadow, padding |
+| IMGBUTTON | `main` | Image states |
 | LABEL | `main` | Text color, font, decoration |
 | IMAGE | `main` | Recolor, opacity, transform |
 | SLIDER | `main`, `indicator`, `knob` | main=track bg, indicator=fill, knob=handle |
@@ -41,14 +43,16 @@ be set on any part.
 | BAR | `main`, `indicator` | Like slider without knob |
 | SWITCH | `main`, `indicator`, `knob` | main=track, indicator=on-state, knob=toggle |
 | CHECKBOX | `main`, `bullet` | main=text area, bullet=the tick box |
-| DROPDOWN | `main` | The button; list inherits |
+| DROPDOWN | `main`, `indicator`, `list_main`, `list_selected` | The button, arrow, list bg, highlighted item |
 | ROLLER | `main`, `selected` | main=list bg, selected=highlighted row |
-| TEXTAREA | `main`, `selected`, `cursor` | main=bg, selected=highlight, cursor=blinker |
+| TEXTAREA | `main`, `selected`, `cursor`, `placeholder` | bg, highlight, blinker, placeholder text |
 | KEYBOARD | `main`, `items` | main=bg, items=individual keys |
-| CHART | `bg`, `scrollbar`, `indicator`, `ticks` | bg=chart area, ticks=axis labels |
+| SPINBOX | `main`, `cursor` | Input field, cursor |
+| CHART | `bg`, `scrollbar`, `indicator`, `items`, `ticks` | bg=chart area, items=data points, ticks=axis labels |
+| CALENDAR | `main`, `items` | Background, day cells |
 | SPINNER | `main`, `indicator` | main=bg track, indicator=spinning arc |
-| TABVIEW | `main` | Tab bar container |
-| TABPAGE | `main` | Individual tab content area |
+| TABVIEW | `main`, `buttons_main`, `buttons_items` | Tab bar container, tab buttons bg, individual tabs |
+| TABPAGE | `main`, `scrollbar` | Content area, scrollbar |
 
 ### Style State Structure
 

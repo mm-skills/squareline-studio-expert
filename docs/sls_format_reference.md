@@ -384,7 +384,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `DROPDOWN/Base_text` | 10 | Static text (overrides selected display) |
 | `DROPDOWN/Show_selected` | 2 | Show selected option |
 | `DROPDOWN/List_align` | 3 | `"BOTTOM"`, `"TOP"`, `"LEFT"`, `"RIGHT"` |
-| **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_list_main` (list MAIN), `Style_list_scrollbar` (list SCROLLBAR), `Style_list_selected` (list SELECTED) |
+| **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_list_main` (list MAIN), `Style_list_selected` (list SELECTED) |
 
 ### ROLLER
 | strtype | IT | Description |
@@ -694,9 +694,9 @@ Sets a label's text to the event source slider's value, with optional prefix/pos
 - CallC: `_ui_slider_set_text_value( <{Target}>, target, "<{Prefix}>", "<{Postfix}>");`
 - Parameters: Target label (IT=9), Prefix (IT=10), Postfix (IT=10)
 
-#### SET TEXT VALUE FROM SWITCH
-Sets a label's text based on a switch's state.
-Parameters: Target label (IT=9), Source switch (IT=9), On text (IT=10), Off text (IT=10).
+#### SET TEXT VALUE WHEN CHECKED
+Sets a label's text based on whether the source widget is in checked state.
+Parameters: Target label (IT=9), Checked text (IT=10), Unchecked text (IT=10).
 
 #### Property-Setting Actions
 
@@ -712,7 +712,7 @@ These follow the same pattern as LABEL_PROPERTY but for other widget types:
 | `ROLLER_PROPERTY` | ROLLER | Selected index |
 | `SLIDER_PROPERTY` | SLIDER | Value |
 
-#### Complete Action Summary (24 actions)
+#### Complete Action Summary (24 user-facing actions)
 
 | Category | Actions | Confirmed |
 |----------|--------|:---:|
@@ -721,7 +721,7 @@ These follow the same pattern as LABEL_PROPERTY but for other widget types:
 | Animation | PLAY ANIMATION, SET OPACITY | ✅, ✅ |
 | Value Increment | INCREMENT ARC, INCREMENT BAR, INCREMENT SLIDER | ✅, —, — |
 | Property Setting | LABEL_PROPERTY, SLIDER_PROPERTY, BAR_PROPERTY, DROPDOWN_PROPERTY, IMAGE_PROPERTY, ROLLER_PROPERTY, BASIC_PROPERTY | ✅, ✅, — |
-| Text Display | SET TEXT VALUE FROM ARC, SET TEXT VALUE FROM SLIDER, SET TEXT VALUE FROM SWITCH | ✅, ✅, — |
+| Text Display | SET TEXT VALUE FROM ARC, SET TEXT VALUE FROM SLIDER, SET TEXT VALUE WHEN CHECKED | ✅, ✅, ✅ |
 | State/Flag | MODIFY FLAG, MODIFY STATE | ✅, ✅ |
 | Keyboard | KEYBOARD SET TARGET, MOVE CURSOR | —, — |
 | Other | STEP SPINBOX, SWITCH THEME | —, — |
@@ -1006,8 +1006,8 @@ Useful paths inside the SquareLine Studio installation:
 | `~/SquareLine/boards/<Group>/<board>/` | Downloaded board `.slb` definitions (JSON) |
 | `<app>/Contents/boards/` | Bundled board definitions |
 | `<app>/Contents/examples/` | 15 example projects (full `.spj`/`.sll`/`.slt`) |
-| `<app>/Contents/lvgl/lvgl_v*/objects/` | Widget definitions (`.elojb`, encrypted) |
-| `<app>/Contents/lvgl/lvgl_v*/objects/functions/` | Event action definitions (`.elojb`, encrypted) |
+| `<app>/Contents/lvgl/lvgl_v*/objects/` | Internal widget definitions |
+| `<app>/Contents/lvgl/lvgl_v*/objects/functions/` | Internal event action definitions |
 | `<app>/Contents/lvgl/extensions/` | Theme manager C/Python templates |
 | `<app>/Contents/codeformat_c.cfg` | astyle config for generated C code |
 
@@ -1038,4 +1038,4 @@ Useful paths inside the SquareLine Studio installation:
 | GRID layout params | Low | Set a Panel to GRID layout in SLS, save, compare |
 | Theme file with actual overrides | Low | Customise a theme in SLS, save |
 | Multi-state style combos | Low | e.g., `"CHECKED|PRESSED"` compound states |
-| LVGL 9.x property differences | Low | Compare v8 and v9 .elojb structures when possible |
+| LVGL 9.x property differences | Low | Compare v8 and v9 widget structures when possible |
