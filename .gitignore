@@ -5,7 +5,5 @@
 __pycache__/
 *.pyc
 
-# SLS editor cache and backups (large binary blobs)
-research/*/cache/
-research/*/backup/
-*.slp
+# Research data (local reference projects, not for distribution)
+research/
