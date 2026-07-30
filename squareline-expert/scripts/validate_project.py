@@ -20,6 +20,8 @@ import sys
 
 
 class Validator:
+    BUILTIN_MONTSERRAT_SIZES = {str(i) for i in range(8, 50, 2)}
+
     def __init__(self, project_dir):
         self.project_dir = project_dir
         self.errors = []
@@ -29,6 +31,7 @@ class Validator:
         self.max_nid = 0
         self.widget_names = set()
         self.screen_guids = set()
+        self.fonts_checked = 0
 
     def error(self, msg):
         self.errors.append(f"❌ {msg}")
@@ -158,6 +161,36 @@ class Validator:
                                 f"in {param.get('strtype')}"
                             )
 
+    def check_fonts(self, obj, path="root"):
+        """Check font references are valid."""
+        if isinstance(obj, dict):
+            for prop in obj.get("properties", []):
+                self._check_font_prop(prop, path)
+
+            for i, child in enumerate(obj.get("children", [])):
+                child_name = ""
+                for p in child.get("properties", []):
+                    if p.get("strtype") == "OBJECT/Name" or p.get("strtype") == "TABPAGE/Name":
+                        child_name = p.get("strval", "")
+                self.check_fonts(child, f"{path}/{child_name or i}")
+
+    def _check_font_prop(self, prop, path):
+        if prop.get("strtype") == "_style/Text_Font" and prop.get("InheritedType") == 3:
+            font_name = prop.get("strval", "")
+            if font_name:
+                self.fonts_checked += 1
+                if font_name.startswith("montserrat_"):
+                    size = font_name.split("_")[-1]
+                    if size not in self.BUILTIN_MONTSERRAT_SIZES:
+                        self.warn(f"Unknown built-in font size '{font_name}' at {path}")
+                elif font_name.startswith("ui_font_"):
+                    pass # Valid custom font
+                else:
+                    self.warn(f"Unrecognized font naming convention '{font_name}' at {path}")
+        
+        for child in prop.get("childs", []):
+            self._check_font_prop(child, path)
+
     def check_consistency(self, spj_data, sll_data):
         """Check .spj info block matches .sll."""
         info = spj_data.get("info", {})
@@ -211,6 +244,8 @@ class Validator:
 
         self.check_widget_structure(root)
         self.check_event_refs(root)
+        self.check_fonts(root)
+        self.ok(f"Checked {self.fonts_checked} font references")
 
         if sll_data:
             self.check_consistency(spj_data, sll_data)
