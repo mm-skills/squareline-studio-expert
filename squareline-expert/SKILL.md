@@ -172,8 +172,40 @@ python3 scripts/validate_project.py /path/to/output/
 | Configure for CrowPanel boards | `references/targets/esp32-crowpanel.md` |
 | Configure for generic Arduino boards | `references/targets/general-arduino.md` |
 | Find board strings from user's SLS install | `references/targets/supported-boards.md` |
+| Design a screen layout or choose a pattern | `references/ux/design-guidelines.md` |
+| Layout patterns for round displays | `references/ux/round-display-patterns.md` |
+| Layout patterns for rectangular displays | `references/ux/rectangular-display-patterns.md` |
+| Plan screen navigation and flow | `references/ux/screen-flow-patterns.md` |
+| Build a common UI component (thermostat, settings, etc.) | `references/ux/widget-recipes.md` |
 
 ---
+
+## UX Design Guidelines (Advisory)
+
+When generating UI layouts, consult `references/ux/` for best-practice guidance drawn from
+Material Design, iOS Human Interface Guidelines, and embedded display ergonomics.
+
+**How to apply these guidelines:**
+1. **Follow by default** — use recommended patterns, sizes, and layouts unless the user
+   specifies otherwise. These patterns are drawn from mobile UI conventions that most
+   users are already familiar with.
+2. **Flag concerns, don't block** — if a user's request conflicts with a guideline,
+   implement what they ask but note the concern:
+   > ⚠️ **UX note:** The touch targets on this screen are 30×30px, below the
+   > recommended 48×48px minimum for embedded displays. This may be difficult to
+   > tap accurately. Let me know if you'd like me to adjust sizing.
+3. **Never refuse** — these are guidelines, not rules. The user's intent always takes
+   priority over best practice.
+4. **Suggest improvements** — when generating from scratch, proactively apply best
+   practices and briefly mention which guidelines informed your choices.
+5. **Consider the input model** — if the device has a rotary encoder, prefer sequential
+   navigation patterns and scroll-friendly layouts. If touch-only, prioritise clear
+   tap targets and gesture affordances.
+
+→ Read `references/ux/design-guidelines.md` for the full guideline catalog.
+
+---
+
 
 ## Output Verification Checklist
 

@@ -1039,3 +1039,20 @@ Useful paths inside the SquareLine Studio installation:
 | Theme file with actual overrides | Low | Customise a theme in SLS, save |
 | Multi-state style combos | Low | e.g., `"CHECKED|PRESSED"` compound states |
 | LVGL 9.x property differences | Low | Compare v8 and v9 widget structures when possible |
+
+---
+
+## 16. UX Design Guidelines
+
+The skill includes advisory UX best-practice guidelines under `references/ux/`:
+
+| Reference | Contents |
+|-----------|----------|
+| `design-guidelines.md` | Touch targets, typography, colour, contrast, layout principles, feedback states. Adapted from Material Design and iOS HIG. |
+| `round-display-patterns.md` | Safe zone calculation, 7 layout patterns for circular displays (gauge, radial menu, value+controls, dashboard, indicator, list, clock) |
+| `rectangular-display-patterns.md` | 8 layout patterns for rectangular displays (tab bar, dashboard grid, master-detail, cards, hero+controls, toolbar, form, carousel) |
+| `screen-flow-patterns.md` | Navigation models (hub-and-spoke, tab, carousel, hierarchical, modal, wizard), transition best practices, rotary encoder navigation |
+| `widget-recipes.md` | 10 ready-made widget compositions (thermostat, toggle row, sensor dashboard, nav bar, settings list, alert dialog, splash screen, chart view, input form, clock display) |
+
+These guidelines are **advisory** — the agent should follow them by default, flag concerns
+if the user overrides, but never refuse a user's request based on them.
