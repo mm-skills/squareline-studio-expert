@@ -544,8 +544,14 @@ class WidgetBuilder:
             ],
         }
 
-    def increment_slider(self, target_guid, value=10):
-        """Build an INCREMENT SLIDER action dict."""
+    def increment_slider(self, target_guid, value=10, animate="ON"):
+        """Build an INCREMENT SLIDER action dict.
+
+        Args:
+            target_guid: GUID of the target slider widget
+            value: Increment amount
+            animate: "ON" for animated, "OFF" for instant value change
+        """
         n = self._next_nid
         return {
             "strtype": "_event/action", "strval": "INCREMENT SLIDER",
@@ -554,20 +560,28 @@ class WidgetBuilder:
                 {"nid": n(), "strtype": "INCREMENT SLIDER/Name",
                  "strval": "INCREMENT SLIDER", "InheritedType": 10},
                 {"nid": n(), "strtype": "INCREMENT SLIDER/Call",
-                 "strval": "IncrementSlider( <{Target}>, <{Value}> )",
+                 "strval": "IncrementSlider( <{Target}>, <{Value}>, LV_ANIM_<{Animate}> )",
                  "InheritedType": 10},
                 {"nid": n(), "strtype": "INCREMENT SLIDER/CallC",
-                 "strval": "_ui_slider_increment( <{Target}>, <{Value}>);",
+                 "strval": "_ui_slider_increment( <{Target}>, <{Value}>, LV_ANIM_<{Animate}>);",
                  "InheritedType": 10},
                 {"nid": n(), "strtype": "INCREMENT SLIDER/Target",
                  "strval": target_guid, "InheritedType": 9},
                 {"nid": n(), "strtype": "INCREMENT SLIDER/Value",
                  "integer": value, "InheritedType": 6},
+                {"nid": n(), "strtype": "INCREMENT SLIDER/Animate",
+                 "strval": animate, "InheritedType": 3},
             ],
         }
 
-    def increment_bar(self, target_guid, value=10):
-        """Build an INCREMENT BAR action dict."""
+    def increment_bar(self, target_guid, value=10, animate="ON"):
+        """Build an INCREMENT BAR action dict.
+
+        Args:
+            target_guid: GUID of the target bar widget
+            value: Increment amount
+            animate: "ON" for animated, "OFF" for instant value change
+        """
         n = self._next_nid
         return {
             "strtype": "_event/action", "strval": "INCREMENT BAR",
@@ -576,15 +590,17 @@ class WidgetBuilder:
                 {"nid": n(), "strtype": "INCREMENT BAR/Name",
                  "strval": "INCREMENT BAR", "InheritedType": 10},
                 {"nid": n(), "strtype": "INCREMENT BAR/Call",
-                 "strval": "IncrementBar( <{Target}>, <{Value}> )",
+                 "strval": "IncrementBar( <{Target}>, <{Value}>, LV_ANIM_<{Animate}> )",
                  "InheritedType": 10},
                 {"nid": n(), "strtype": "INCREMENT BAR/CallC",
-                 "strval": "_ui_bar_increment( <{Target}>, <{Value}>);",
+                 "strval": "_ui_bar_increment( <{Target}>, <{Value}>, LV_ANIM_<{Animate}>);",
                  "InheritedType": 10},
                 {"nid": n(), "strtype": "INCREMENT BAR/Target",
                  "strval": target_guid, "InheritedType": 9},
                 {"nid": n(), "strtype": "INCREMENT BAR/Value",
                  "integer": value, "InheritedType": 6},
+                {"nid": n(), "strtype": "INCREMENT BAR/Animate",
+                 "strval": animate, "InheritedType": 3},
             ],
         }
 
@@ -882,7 +898,7 @@ class WidgetBuilder:
 
     def image(self, name, src="", size=(100, 100), align="CENTER",
               x_offset=0, y_offset=0, zoom=256, angle=0, pivot=None,
-              style=None):
+              inner_align="CENTER", style=None):
         """
         Create an IMAGE widget.
 
@@ -895,6 +911,9 @@ class WidgetBuilder:
             zoom: Scale factor (256 = 100%)
             angle: Rotation in 0.1° units
             pivot: Optional [x, y] rotation pivot point
+            inner_align: Image alignment within widget. One of: CENTER,
+                TOP_LEFT, TOP_MID, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_MID,
+                BOTTOM_RIGHT, LEFT_MID, RIGHT_MID, STRETCH, TILE
             style: Optional style properties
 
         Returns:
@@ -917,6 +936,9 @@ class WidgetBuilder:
         if zoom != 256:
             props.append({"nid": 1050, "strtype": "IMAGE/Scale",
                           "integer": zoom, "InheritedType": 6})
+        if inner_align != "CENTER":
+            props.append({"nid": 1055, "strtype": "IMAGE/Inner_align",
+                          "strval": inner_align, "InheritedType": 3})
 
         style_childs = []
         if style:

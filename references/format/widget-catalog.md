@@ -68,6 +68,7 @@ All confirmed from `research/new01/` (v1.6.1).
 | `IMAGE/Pivot` | 7 | Rotation pivot `[x, y]` |
 | `IMAGE/Rotation` | 6 | Rotation (0.1° units) |
 | `IMAGE/Scale` | 6 | Scale (256 = 100%) |
+| `IMAGE/Inner_align` | 3 | `CENTER` | Image alignment within widget. Choices: `TOP_LEFT`, `TOP_MID`, `TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_MID`, `BOTTOM_RIGHT`, `LEFT_MID`, `RIGHT_MID`, `CENTER`, `STRETCH`, `TILE` |
 | **Style parts:** | | `Style_main` (MAIN) |
 
 ### ARC
@@ -121,7 +122,7 @@ All confirmed from `research/new01/` (v1.6.1).
 | `DROPDOWN/Base_text` | 10 | Static text (overrides selected display) |
 | `DROPDOWN/Show_selected` | 2 | Show selected option |
 | `DROPDOWN/List_align` | 3 | `"BOTTOM"`, `"TOP"`, `"LEFT"`, `"RIGHT"` |
-| **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_list_main` (list MAIN), `Style_list_selected` (list SELECTED) |
+| **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_list_main` (list MAIN), `Style_list_selected` (list SELECTED), `Style_list_scrollbar` |
 
 ### ROLLER
 | strtype | IT | Description |
