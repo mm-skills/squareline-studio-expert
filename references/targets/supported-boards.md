@@ -86,7 +86,10 @@ into the `.sll` and `.spj` info block:
 
 > [!WARNING]
 > The `board` string in `.sll` must **exactly match** the `title` field from the
-> `.slb` file. A mismatch causes SLS to show "Custom Board" in project info.
+> `.slb` file. A mismatch causes SLS to show "Custom Board" in project info and
+> may cause SLS to **fall back to v8 code generation** on export, even if
+> `lvgl_version` is set to a v9 version. Always verify the board string against
+> the installed `.slb` board packs.
 
 > [!NOTE]
 > The `.slb` `shape` uses lowercase (`"rectangle"`, `"circle"`), but the `.sll`

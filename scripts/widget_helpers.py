@@ -405,7 +405,7 @@ class WidgetBuilder:
             A style state dict ready for insertion into a style part's childs.
         """
         return {
-            "strtype": "_stylestate/state",
+            "strtype": "_style/StyleState",
             "strval": state,
             "childs": self.style(**kwargs),
         }
@@ -685,11 +685,11 @@ class WidgetBuilder:
             "strval": trigger,
             "InheritedType": 4,
             "childs": [
-                {"nid": n(), "strtype": "_event/name",
+                {"nid": n(), "strtype": "_custom/name",
                  "strval": event_name, "InheritedType": 10},
-                {"nid": n(), "strtype": "_event/condition_C",
+                {"nid": n(), "strtype": "_custom/condition_C",
                  "strval": "", "InheritedType": 10},
-                {"nid": n(), "strtype": "_event/condition_P",
+                {"nid": n(), "strtype": "_custom/condition_P",
                  "strval": "", "InheritedType": 10},
                 action,
             ],
@@ -820,7 +820,7 @@ class WidgetBuilder:
             default_style_props.extend(style)
         if default_style_props:
             style_childs.append({
-                "strtype": "_stylestate/state",
+                "strtype": "_style/StyleState",
                 "strval": "DEFAULT",
                 "childs": default_style_props,
             })
@@ -866,13 +866,13 @@ class WidgetBuilder:
         style_childs = []
         if style:
             style_childs.append({
-                "strtype": "_stylestate/state",
+                "strtype": "_style/StyleState",
                 "strval": "DEFAULT",
                 "childs": style,
             })
         if pressed_style:
             style_childs.append({
-                "strtype": "_stylestate/state",
+                "strtype": "_style/StyleState",
                 "strval": "PRESSED",
                 "childs": pressed_style,
             })
@@ -943,7 +943,7 @@ class WidgetBuilder:
         style_childs = []
         if style:
             style_childs.append({
-                "strtype": "_stylestate/state", "strval": "DEFAULT",
+                "strtype": "_style/StyleState", "strval": "DEFAULT",
                 "childs": style,
             })
         props.append(self._style_part("IMAGE", "MAIN", "main", 1060,
@@ -1001,7 +1001,7 @@ class WidgetBuilder:
             childs = []
             if part_style:
                 childs.append({
-                    "strtype": "_stylestate/state", "strval": "DEFAULT",
+                    "strtype": "_style/StyleState", "strval": "DEFAULT",
                     "childs": part_style,
                 })
             props.append(self._style_part(prefix, part_name, part_label, nid,
@@ -1058,7 +1058,7 @@ class WidgetBuilder:
             childs = []
             if part_style:
                 childs.append({
-                    "strtype": "_stylestate/state", "strval": "DEFAULT",
+                    "strtype": "_style/StyleState", "strval": "DEFAULT",
                     "childs": part_style,
                 })
             props.append(self._style_part(prefix, part_name, part_label, nid,
@@ -1106,7 +1106,7 @@ class WidgetBuilder:
             childs = []
             if part_style:
                 childs.append({
-                    "strtype": "_stylestate/state", "strval": "DEFAULT",
+                    "strtype": "_style/StyleState", "strval": "DEFAULT",
                     "childs": part_style,
                 })
             props.append(self._style_part(prefix, part_name, part_label, nid,
@@ -1165,7 +1165,7 @@ class WidgetBuilder:
             childs = []
             if part_style:
                 childs.append({
-                    "strtype": "_stylestate/state", "strval": "DEFAULT",
+                    "strtype": "_style/StyleState", "strval": "DEFAULT",
                     "childs": part_style,
                 })
             props.append(self._style_part(prefix, part_name, part_label, nid,
@@ -1209,7 +1209,7 @@ class WidgetBuilder:
         style_childs = []
         if style:
             style_childs.append({
-                "strtype": "_stylestate/state", "strval": "DEFAULT",
+                "strtype": "_style/StyleState", "strval": "DEFAULT",
                 "childs": style,
             })
 
@@ -1253,7 +1253,7 @@ class WidgetBuilder:
         style_childs = []
         if style:
             style_childs.append({
-                "strtype": "_stylestate/state", "strval": "DEFAULT",
+                "strtype": "_style/StyleState", "strval": "DEFAULT",
                 "childs": style,
             })
         props.append(self._style_part("CHECKBOX", "MAIN", "main", 1030,
@@ -1309,7 +1309,7 @@ class WidgetBuilder:
         style_childs = []
         if style:
             style_childs.append({
-                "strtype": "_stylestate/state", "strval": "DEFAULT",
+                "strtype": "_style/StyleState", "strval": "DEFAULT",
                 "childs": style,
             })
         props.extend([
@@ -1369,7 +1369,7 @@ class WidgetBuilder:
             childs = []
             if part_style:
                 childs.append({
-                    "strtype": "_stylestate/state", "strval": "DEFAULT",
+                    "strtype": "_style/StyleState", "strval": "DEFAULT",
                     "childs": part_style,
                 })
             props.append(self._style_part(prefix, part_name, part_label, nid,
@@ -1423,7 +1423,7 @@ class WidgetBuilder:
         style_childs = []
         if style:
             style_childs.append({
-                "strtype": "_stylestate/state", "strval": "DEFAULT",
+                "strtype": "_style/StyleState", "strval": "DEFAULT",
                 "childs": style,
             })
         props.extend([
@@ -1468,7 +1468,7 @@ class WidgetBuilder:
             childs = []
             if part_style:
                 childs.append({
-                    "strtype": "_stylestate/state", "strval": "DEFAULT",
+                    "strtype": "_style/StyleState", "strval": "DEFAULT",
                     "childs": part_style,
                 })
             props.append(self._style_part(prefix, part_name, part_label, nid,
@@ -1516,7 +1516,7 @@ class WidgetBuilder:
         style_childs = []
         if style:
             style_childs.append({
-                "strtype": "_stylestate/state", "strval": "DEFAULT",
+                "strtype": "_style/StyleState", "strval": "DEFAULT",
                 "childs": style,
             })
         props.extend([
