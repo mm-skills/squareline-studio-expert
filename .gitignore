@@ -5,5 +5,8 @@
 __pycache__/
 *.pyc
 
-# Research data (local reference projects, not for distribution)
-research/
+# Generated cache
+scripts/.board_cache.json
+
+# Working folder for sample projects used to work out file structure
+.dev/.dev/research/
