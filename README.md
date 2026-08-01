@@ -17,7 +17,7 @@ An AI skill for generating [SquareLine Studio](https://squareline.io/) project f
 Add this repo as a submodule in your project's skill directory:
 
 ```bash
-git submodule add https://github.com/your-org/squareline-studio-skill.git .agents/skills/squareline-expert
+git submodule add https://github.com/matthewmcneill/squareline-studio-skill.git .agents/skills/squareline-expert
 ```
 
 To update to the latest version:
