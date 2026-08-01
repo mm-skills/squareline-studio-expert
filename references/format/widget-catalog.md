@@ -7,7 +7,10 @@ This document catalogs the 24 widget types available in SquareLine Studio, detai
 All confirmed from `research/new01/` (v1.6.1).
 
 > [!NOTE]
-> CONTAINER is an LVGL 9.x alias for PANEL. COLORWHEEL was removed in LVGL 9.
+> **LVGL version matters for widget availability.** CONTAINER is the LVGL 9.x name
+> for PANEL (both work in SLS). COLORWHEEL was removed in LVGL 9 — do not use it
+> for v9 projects. See `references/format/lvgl-version-guide.md` for the full
+> version compatibility table.
 
 ### SCREEN
 | strtype | IT | Description |
@@ -200,8 +203,10 @@ All confirmed from `research/new01/` (v1.6.1).
 
 ### COLORWHEEL
 
-> [!NOTE]
-> COLORWHEEL was removed in LVGL 9 (v8 only).
+> [!WARNING]
+> COLORWHEEL was removed in LVGL 9. Only use this widget when the project targets
+> LVGL v8 (`lvgl_version: "8.3.*"` in the `.sll` file). SLS will still show it in
+> the widget palette for v8 projects, but it will not appear for v9 projects.
 
 | strtype | IT | Description |
 |---------|:---:|---|
