@@ -67,7 +67,7 @@ Flat JSON object. Fields vary between versions.
     "projectExportFolderPath": "...",
     "custom_variable_prefix": "uic",
     "backup_cnt": 417, "autosave_cnt": 0,
-    "lvgl_version": "8.3.6",
+    "lvgl_version": "9.2.2",
     "callfuncsexport": "C_FILE",
     "imageexport": "SOURCE",
     "lvgl_include_path": "lvgl.h",
@@ -1038,7 +1038,7 @@ Useful paths inside the SquareLine Studio installation:
 | GRID layout params | Low | Set a Panel to GRID layout in SLS, save, compare |
 | Theme file with actual overrides | Low | Customise a theme in SLS, save |
 | Multi-state style combos | Low | e.g., `"CHECKED|PRESSED"` compound states |
-| LVGL 9.x property differences | Low | Compare v8 and v9 widget structures when possible |
+| ~~LVGL 9.x property differences~~ | ~~Low~~ | Addressed in `references/format/lvgl-version-guide.md` |
 
 ---
 

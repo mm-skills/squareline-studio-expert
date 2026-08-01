@@ -167,15 +167,19 @@ class WidgetBuilder:
     all widgets built by the same builder instance.
     """
 
-    def __init__(self, starting_nidcnt=1000400):
+    def __init__(self, starting_nidcnt=1000400, lvgl_version="9.2.2"):
         """
         Args:
             starting_nidcnt: Starting value for dynamic nid allocation.
                 Must be higher than any fixed widget property nids (typically < 2000).
                 Default 1000400 matches the pattern used in SLS projects.
+            lvgl_version: Target LVGL version string (e.g., "8.3.11", "9.2.2").
+                Used to validate widget compatibility. Default "9.2.2" matches
+                current SLS bundled examples.
         """
         self._nidcnt = starting_nidcnt
         self._guids = set()
+        self._lvgl_major = int(lvgl_version.split(".")[0]) if lvgl_version else 9
 
     @property
     def nidcnt(self):

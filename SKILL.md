@@ -104,6 +104,16 @@ SLS ships 21 built-in Montserrat font sizes: **8, 10, 12, 14, 16, 18, 20, 22, 24
 size outside this range requires SLS Font Manager generation.
 → Read `references/format/fonts.md` for the complete font reference.
 
+### 14. LVGL version determines widget availability and code output
+SLS supports LVGL **v8.3.x** and **v9.x** (9.1, 9.2, 9.3). The LVGL version is set
+by the board's `supported_lvgl_version` field. Key differences:
+- **COLORWHEEL** is v8 only — removed in LVGL 9
+- **CONTAINER** is the LVGL 9 name for PANEL (both work in SLS)
+- Most popular boards (Arduino TFT_eSPI, CrowPanel, MaTouch, M5Stack) now target **v9.3**
+- All 15 bundled SLS examples use **v9.2.2**
+- Default to **v9** for new projects unless the user specifies a v8 board.
+→ Read `references/format/lvgl-version-guide.md` for the full version guide.
+
 ---
 
 ## Core Workflow
@@ -114,6 +124,9 @@ Before generating, establish:
   Default to **Personal (free)** unless the user specifies otherwise.
 - **Display**: Resolution (width × height), shape (RECTANGLE/CIRCLE), color depth
 - **Board**: Target hardware (e.g., "ESP32S335D - MaTouch 3.5-inch")
+- **LVGL version**: Determined by board selection. Default to **v9** for new projects.
+  If the user mentions a specific board, check its `supported_lvgl_version`.
+  → Read `references/format/lvgl-version-guide.md` if uncertain.
 - **Screens**: How many screens, navigation flow between them
 - **Widgets**: What UI elements on each screen
 - **Interactions**: Touch events, value changes, screen transitions
@@ -196,7 +209,9 @@ python3 scripts/validate_project.py /path/to/output/
 | Check license tier limits and widget budgets | `references/licensing-limitations.md` |
 | Check available fonts or add custom fonts | `references/format/fonts.md` |
 | Find image assets for a project | `references/format/image-asset-sources.md` |
+| Check LVGL version compatibility and migration | `references/format/lvgl-version-guide.md` |
 | Build widgets programmatically with a helper API | `scripts/widget_helpers.py` |
+| Debug SLS crashes, LVGL runtime errors, or project load failures | `references/troubleshooting.md` |
 | Report a bug or defect in the skill | `references/issue-management.md` |
 | Contribute a fix or propose an enhancement | `references/contribution-protocol.md` |
 
@@ -261,8 +276,8 @@ Before delivering generated project files, verify:
 `KEYBOARD` · `SPINNER` · `SPINBOX` · `CALENDAR` · `CHART` · `COLORWHEEL`† ·
 `TABVIEW` · `TABPAGE`
 
-\* CONTAINER = LVGL 9.x alias for PANEL  
-† COLORWHEEL = v8 only, removed in LVGL 9
+\* CONTAINER = LVGL 9.x alias for PANEL (preferred name in v9 projects)  
+† COLORWHEEL = v8 only, removed in LVGL 9 — do not use for v9 projects
 
 → See `references/format/widget-catalog.md` for full property tables.
 

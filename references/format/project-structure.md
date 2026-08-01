@@ -60,7 +60,7 @@ Flat JSON object. Fields vary between versions.
     "projectExportFolderPath": "...",
     "custom_variable_prefix": "uic",
     "backup_cnt": 417, "autosave_cnt": 0,
-    "lvgl_version": "8.3.6",
+    "lvgl_version": "9.2.2",
     "callfuncsexport": "C_FILE",
     "imageexport": "SOURCE",
     "lvgl_include_path": "lvgl.h",
@@ -68,6 +68,11 @@ Flat JSON object. Fields vary between versions.
     "nidcnt": 1000355
 }
 ```
+
+> [!NOTE]
+> The `lvgl_version` field must match the board's `supported_lvgl_version` from its
+> `.slb` definition. SLS v1.6.1 supports `8.3.11`, `9.1.0`, `9.2.2`, and `9.3`.
+> All bundled examples now use `9.2.2`. See `references/format/lvgl-version-guide.md`.
 
 ### v1.6.1 additional/changed fields
 ```json

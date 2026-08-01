@@ -222,7 +222,7 @@ def main():
                         help="Board name string")
     parser.add_argument("--board-version", default="v1.0.0", help="Board version")
     parser.add_argument("--editor-version", default="1.6.1", help="SLS editor version")
-    parser.add_argument("--lvgl-version", default="8.3.11", help="LVGL version")
+    parser.add_argument("--lvgl-version", default="9.2.2", help="LVGL version")
     parser.add_argument("--screens", type=int, default=1, help="Number of screens")
     parser.add_argument("--screen-names", nargs="*", help="Screen names (default: Screen1, Screen2, ...)")
     parser.add_argument("--output", required=True, help="Output directory")
