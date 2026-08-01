@@ -9,4 +9,4 @@ __pycache__/
 scripts/.board_cache.json
 
 # Working folder for sample projects used to work out file structure
-.dev/.dev/research/
+.dev/
