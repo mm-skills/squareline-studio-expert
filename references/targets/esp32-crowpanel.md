@@ -7,14 +7,19 @@ Board-specific configuration for Elecrow CrowPanel displays with ESP32-S3.
 | Parameter | Value |
 |-----------|-------|
 | **Board** | `"Arduino with TFT_eSPI"` |
-| **Board Version** | `"v1.1.1"` |
+| **Board Version** | `"v2.3.0"` |
 | **Width** | `240` |
 | **Height** | `240` |
 | **Shape** | `"CIRCLE"` |
-| **LVGL Version** | `"8.3.6"` |
+| **LVGL Version** | `"9.2.2"` |
 | **LVGL Include** | `"lvgl.h"` |
-| **Editor Version** | `"1.5.0"` (original) or `"1.6.1"` (current) |
+| **Editor Version** | `"1.6.1"` |
 | **Color Depth** | 16-bit (RGB565) |
+
+> [!WARNING]
+> The `"Arduino with TFT_eSPI"` board exists in multiple versions. Use `v2.3.0`
+> for LVGL 9.x projects. Older versions (v1.x) only support LVGL 8.3.x and will
+> cause SLS to export v8 code even if `lvgl_version` is set to v9.
 
 ### Script Command
 ```bash
@@ -23,8 +28,8 @@ python3 scripts/generate_project.py \
   --width 240 --height 240 \
   --shape CIRCLE \
   --board "Arduino with TFT_eSPI" \
-  --board-version "v1.1.1" \
-  --lvgl-version "8.3.6" \
+  --board-version "v2.3.0" \
+  --lvgl-version "9.2.2" \
   --output ./my_project/
 ```
 
@@ -90,5 +95,6 @@ python3 scripts/generate_project.py \
 
 > [!NOTE]
 > All CrowPanel models use ESP32-S3 with TFT_eSPI driver. The board string
-> `"Arduino with TFT_eSPI"` works for all sizes. The 1.28" round model is the
-> only one requiring `shape: "CIRCLE"`.
+> `"Arduino with TFT_eSPI"` works for all sizes. Use board version `v2.3.0` for
+> LVGL 9.x. The 1.28" round model is the only one requiring `shape: "CIRCLE"`.
+

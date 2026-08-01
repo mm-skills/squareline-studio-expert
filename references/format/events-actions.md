@@ -14,11 +14,11 @@ Events are inline children of widget properties:
   "nid": 1000343,
   "strtype": "_event/EventHandler",
   "strval": "CLICKED",
-  "InheritedType": 10,
+  "InheritedType": 4,
   "childs": [
-    { "strtype": "_event/name", "strval": "Event1", "InheritedType": 10 },
-    { "strtype": "_event/condition_C", "strval": "", "InheritedType": 10 },
-    { "strtype": "_event/condition_P", "strval": "", "InheritedType": 10 },
+    { "strtype": "_custom/name", "strval": "Event1", "InheritedType": 10 },
+    { "strtype": "_custom/condition_C", "strval": "", "InheritedType": 10 },
+    { "strtype": "_custom/condition_P", "strval": "", "InheritedType": 10 },
     {
       "strtype": "_event/action",
       "strval": "CHANGE SCREEN",

@@ -114,6 +114,21 @@ by the board's `supported_lvgl_version` field. Key differences:
 - Default to **v9** for new projects unless the user specifies a v8 board.
 → Read `references/format/lvgl-version-guide.md` for the full version guide.
 
+### 15. Board string and version determine LVGL export generation
+The `board` and `board_version` in `.sll` must match an installed `.slb` board
+pack. An unrecognised board string causes SLS to show "Custom Board" and may
+silently **fall back to v8 code generation** on export, even if `lvgl_version`
+is set to v9. Many boards (e.g. `"Arduino with TFT_eSPI"`) have multiple
+versions — v1.x supports v8 only, v2.x supports v9. Use `v2.3.0` for v9
+projects. For projects without a hardware-specific board, use
+`"CMake/Eclipse/VScode with SDL for development on PC"` (the board used by all
+15 bundled SLS v1.6.1 examples).
+
+### 16. Only use recognised LVGL version strings
+Valid `lvgl_version` values are: `"8.3.11"`, `"9.1.0"`, `"9.2.2"`, `"9.3"`.
+Arbitrary strings like `"9.0.0"` are silently accepted by SLS but don't map to
+any export template. Default to `"9.2.2"` for new v9 projects.
+
 ---
 
 ## Core Workflow
