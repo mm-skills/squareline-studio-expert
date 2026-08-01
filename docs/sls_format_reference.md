@@ -1,11 +1,26 @@
 # SquareLine Studio Project File Format — Reference Documentation
 
 > [!NOTE]
-> Reverse-engineered from two real SLS projects (v1.5.0 and v1.6.1), cross-referenced with SLS documentation and community sources. **No official file format specification exists** — this is the first comprehensive attempt at one.
+> Reverse-engineered from two real SLS projects (v1.5.0 and v1.6.1), cross-referenced with
+> [official SLS documentation](https://docs.squareline.io/docs/squareline/) and community sources.
+> **No official file format specification exists** — this is the first comprehensive attempt at one.
 >
 > **Source projects analysed:**
 > - `research/crowpanel_1_28_reference/` — v1.5.0, CrowPanel 1.28" round (240×240), 5 screens, events, animations
 > - `research/new01/` — v1.6.1, MaTouch 3.5" (480×320), all 23 widget types, 3 events, style states
+>
+> **Official documentation cross-references:**
+> - [Widgets](https://docs.squareline.io/docs/squareline/widgets) — widget properties and inspector panels
+> - [Events](https://docs.squareline.io/docs/squareline/events) — event triggers and action wiring
+> - [Styles](https://docs.squareline.io/docs/squareline/styles) — style states, parts, and properties
+> - [Screens](https://docs.squareline.io/docs/squareline/screens) — screen management and transitions
+> - [Animations](https://docs.squareline.io/docs/squareline/animations) — animation editor
+> - [Themes](https://docs.squareline.io/docs/squareline/themes) — theme definitions
+> - [Fonts](https://docs.squareline.io/docs/squareline/fonts) — font management
+> - [Assets](https://docs.squareline.io/docs/squareline/assets) — image asset management
+> - [Components](https://docs.squareline.io/docs/squareline/components) — reusable component system
+> - [Export](https://docs.squareline.io/docs/squareline/export) — code export settings
+> - [Project Settings](https://docs.squareline.io/docs/squareline/project) — project configuration
 
 ---
 
@@ -43,7 +58,7 @@ A SquareLine Studio project is a **directory** containing these files:
 
 ---
 
-## 3. `.sll` — Project Metadata
+## 3. `.sll` — Project Metadata [📖](https://docs.squareline.io/docs/squareline/project)
 
 Flat JSON object. Fields vary between versions.
 
@@ -94,7 +109,7 @@ Flat JSON object. Fields vary between versions.
 
 ---
 
-## 4. `Themes.slt` — Theme Definitions
+## 4. `Themes.slt` — Theme Definitions [📖](https://docs.squareline.io/docs/squareline/themes)
 
 ```json
 {
@@ -268,26 +283,26 @@ Every widget has these (`OBJECT/` prefix):
 
 ---
 
-## 8. Complete Widget Catalog (24 Types)
+## 8. Complete Widget Catalog (24 Types) [📖](https://docs.squareline.io/docs/squareline/widgets)
 
 All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 
 > [!NOTE]
 > CONTAINER is an LVGL 9.x alias for PANEL. COLORWHEEL was removed in LVGL 9.
 
-### SCREEN
+### SCREEN [📖](https://docs.squareline.io/docs/squareline/widgets/screen)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `SCREEN/Screen` | 1 | Section header |
 | `SCREEN/Temporary` | 2 | Temporary screen flag |
 | **Style parts:** | | `Style_main` (MAIN), `Style_scrollbar` (SCROLLBAR) |
 
-### PANEL
+### PANEL [📖](https://docs.squareline.io/docs/squareline/widgets/panel)
 | strtype | IT | Description |
 |---------|:---:|---|
 | **Style parts:** | | `Style_main` (MAIN), `Style_scrollbar` (SCROLLBAR) |
 
-### CONTAINER (LVGL 9.x)
+### CONTAINER (LVGL 9.x) [📖](https://docs.squareline.io/docs/squareline/widgets/container)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `CONTAINER/Edited` | 2 | Edit flag |
@@ -296,12 +311,12 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 > Functionally identical to PANEL. Uses standard `OBJECT/*` properties.
 > Found heavily in SLS bundled examples (e.g., Coffee Machine: 218 instances).
 
-### BUTTON
+### BUTTON [📖](https://docs.squareline.io/docs/squareline/widgets/button)
 | strtype | IT | Description |
 |---------|:---:|---|
 | **Style parts:** | | `Style_main` (MAIN) |
 
-### IMGBUTTON
+### IMGBUTTON [📖](https://docs.squareline.io/docs/squareline/widgets/imgbutton)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `IMGBUTTON/Images` | 1 | Section header |
@@ -314,7 +329,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `IMGBUTTON/Image_checked_disabled` | 5 | Asset for checked+disabled |
 | **Style parts:** | | `Style_main` (MAIN) |
 
-### LABEL
+### LABEL [📖](https://docs.squareline.io/docs/squareline/widgets/label)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `LABEL/Label` | 1 | Section header |
@@ -323,7 +338,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `LABEL/Recolor` | 2 | Enable recoloring syntax |
 | **Style parts:** | | `Style_main` (MAIN) |
 
-### IMAGE
+### IMAGE [📖](https://docs.squareline.io/docs/squareline/widgets/image)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `IMAGE/Image` | 1 | Section header |
@@ -333,7 +348,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `IMAGE/Scale` | 6 | Scale (256 = 100%) |
 | **Style parts:** | | `Style_main` (MAIN) |
 
-### ARC
+### ARC [📖](https://docs.squareline.io/docs/squareline/widgets/arc)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `ARC/Arc` | 1 | Section header |
@@ -344,7 +359,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `ARC/Mode` | 3 | `"NORMAL"`, `"REVERSE"`, `"SYMMETRICAL"` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_knob` (KNOB) |
 
-### SLIDER
+### SLIDER [📖](https://docs.squareline.io/docs/squareline/widgets/slider)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `SLIDER/Slider` | 1 | Section header |
@@ -354,7 +369,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `SLIDER/Mode` | 3 | `"NORMAL"`, `"SYMMETRICAL"`, `"RANGE"` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_knob` (KNOB) |
 
-### BAR
+### BAR [📖](https://docs.squareline.io/docs/squareline/widgets/bar)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `BAR/Bar` | 1 | Section header |
@@ -364,19 +379,19 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `BAR/Mode` | 3 | `"NORMAL"`, `"SYMMETRICAL"`, `"RANGE"` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR) |
 
-### SWITCH
+### SWITCH [📖](https://docs.squareline.io/docs/squareline/widgets/switch)
 | strtype | IT | Description |
 |---------|:---:|---|
 | **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_knob` (KNOB) |
 
-### CHECKBOX
+### CHECKBOX [📖](https://docs.squareline.io/docs/squareline/widgets/checkbox)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `CHECKBOX/Checkbox` | 1 | Section header |
 | `CHECKBOX/Title` | 10 | Checkbox text label |
 | **Style parts:** | | `Style_main` (MAIN), `Style_bullet` (INDICATOR) |
 
-### DROPDOWN
+### DROPDOWN [📖](https://docs.squareline.io/docs/squareline/widgets/dropdown)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `DROPDOWN/Dropdown` | 1 | Section header |
@@ -386,7 +401,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `DROPDOWN/List_align` | 3 | `"BOTTOM"`, `"TOP"`, `"LEFT"`, `"RIGHT"` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR), `Style_list_main` (list MAIN), `Style_list_selected` (list SELECTED) |
 
-### ROLLER
+### ROLLER [📖](https://docs.squareline.io/docs/squareline/widgets/roller)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `ROLLER/Roller` | 1 | Section header |
@@ -395,7 +410,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `ROLLER/Mode` | 3 | `"NORMAL"`, `"INFINITE"` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_selected` (SELECTED) |
 
-### TEXTAREA
+### TEXTAREA [📖](https://docs.squareline.io/docs/squareline/widgets/textarea)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `TEXTAREA/TextArea` | 1 | Section header |
@@ -407,20 +422,20 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `TEXTAREA/Password_mode` | 2 | Password masking |
 | **Style parts:** | | `Style_main` (MAIN), `Style_cursor` (CURSOR), `Style_placeholder` (PLACEHOLDER), `Style_selected` (SELECTED) |
 
-### KEYBOARD
+### KEYBOARD [📖](https://docs.squareline.io/docs/squareline/widgets/keyboard)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `KEYBOARD/Mode` | 3 | `"TEXT_LOWER"`, `"TEXT_UPPER"`, `"SPECIAL"`, `"NUMBER"` |
 | `KEYBOARD/Target_textarea` | 9 | GUID of linked textarea (or `"-"`) |
 | **Style parts:** | | `Style_main` (MAIN), `Style_items` (ITEMS) |
 
-### SPINNER
+### SPINNER [📖](https://docs.squareline.io/docs/squareline/widgets/spinner)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `SPINNER/Spinner` | 1 | Section header |
 | **Style parts:** | | `Style_main` (MAIN), `Style_indicator` (INDICATOR) |
 
-### SPINBOX
+### SPINBOX [📖](https://docs.squareline.io/docs/squareline/widgets/spinbox)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `SPINBOX/Spinbox` | 1 | Section header |
@@ -429,13 +444,13 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `SPINBOX/Digit_format` | 7 | `[total_digits, decimal_digits]` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_cursor` (CURSOR) |
 
-### CALENDAR
+### CALENDAR [📖](https://docs.squareline.io/docs/squareline/widgets/calendar)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `CALENDAR/Date` | 7 | `[day, month, year]` |
 | **Style parts:** | | `Style_main` (MAIN), `Style_items` (ITEMS) |
 
-### CHART
+### CHART [📖](https://docs.squareline.io/docs/squareline/widgets/chart)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `CHART/Chart` | 1 | Section header |
@@ -471,7 +486,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 | `COLORWHEEL/Fixed_mode` | 2 | Lock mode |
 | **Style parts:** | | `Style_main` (MAIN), `Style_knob` (KNOB) |
 
-### TABVIEW
+### TABVIEW [📖](https://docs.squareline.io/docs/squareline/widgets/tabview)
 | strtype | IT | Description |
 |---------|:---:|---|
 | `TABVIEW/Tabview` | 1 | Section header |
@@ -492,7 +507,7 @@ All confirmed from `research/new01/` (v1.6.1) and SLS bundled examples.
 
 ---
 
-## 9. Events
+## 9. Events [📖](https://docs.squareline.io/docs/squareline/events)
 
 ### 9.1 Event Structure
 
@@ -519,7 +534,7 @@ Events are inline children of widget properties:
 }
 ```
 
-### 9.2 Event Trigger Types
+### 9.2 Event Trigger Types [📖](https://docs.squareline.io/docs/squareline/events/events)
 
 | Trigger | Description | Confirmed |
 |---------|-------------|:---:|
@@ -545,16 +560,24 @@ Events are inline children of widget properties:
 | `DEFOCUSED` | Widget loses focus | LVGL |
 | `READY` | Process completed | LVGL |
 | `CANCEL` | Process cancelled | LVGL |
-| `KEY` | Key input received | LVGL |
-| `EDITED` | Text content modified | LVGL |
-| `INSERT` | Text inserted | LVGL |
+| `KEY` | Key input received | internal_ref |
+| `KEY_RIGHT(KEY)` | Right key pressed | internal_ref |
+| `KEY_LEFT(KEY)` | Left key pressed | internal_ref |
+| `KEY_UP(KEY)` | Up key pressed | internal_ref |
+| `KEY_DOWN(KEY)` | Down key pressed | internal_ref |
+| `KEY_NEXT(KEY)` | Next key (tab) | internal_ref |
+| `KEY_PREV(KEY)` | Previous key (shift+tab) | internal_ref |
+| `KEY_ENTER(KEY)` | Enter key pressed | internal_ref |
+| `KEY_ESC(KEY)` | Escape key pressed | internal_ref |
+| `EDITED` | Text content modified | internal_ref |
+| `INSERT` | Text inserted | internal_ref |
 
 > [!NOTE]
-> ✅ = confirmed in SLS example projects. LVGL = valid LVGL event type, not yet seen in SLS projects.
-> Compound triggers like `CHECKED(VALUE_CHANGED)` and `GESTURE_LEFT(GESTURE)` use SLS-specific
+> ✅ = confirmed in SLS example projects. internal_ref = confirmed from decoded `.internal_ref` descriptors.
+> Compound triggers like `CHECKED(VALUE_CHANGED)` and `KEY_RIGHT(KEY)` use SLS-specific
 > naming. The parenthesized suffix indicates the underlying LVGL event type.
 
-### 9.3 Event Action Types
+### 9.3 Event Action Types [📖](https://docs.squareline.io/docs/squareline/events/actions)
 
 #### CHANGE SCREEN ✅ confirmed
 ```json
@@ -631,72 +654,226 @@ Events are inline children of widget properties:
 }
 ```
 
-#### INCREMENT BAR
-Same structure as INCREMENT ARC. Uses `_ui_bar_increment()`.
+#### INCREMENT BAR — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "INCREMENT BAR",
+  "childs": [
+    { "strtype": "INCREMENT BAR/Name", "strval": "INCREMENT BAR", "InheritedType": 10 },
+    { "strtype": "INCREMENT BAR/Call", "strval": "IncrementBar( <{Target}>, <{Value}>, LV_ANIM_<{Animate}> )", "InheritedType": 10 },
+    { "strtype": "INCREMENT BAR/CallC", "strval": "_ui_bar_increment( <{Target}>, <{Value}>, LV_ANIM_<{Animate}>);", "InheritedType": 10 },
+    { "strtype": "INCREMENT BAR/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "INCREMENT BAR/Value", "integer": 1, "InheritedType": 6 },
+    { "strtype": "INCREMENT BAR/Animate", "strval": "ON", "InheritedType": 3 }
+  ]
+}
+```
+Animate choices: `ON`, `OFF`
 
-#### INCREMENT SLIDER
-Same structure as INCREMENT ARC. Uses `_ui_slider_increment()`.
+> [!NOTE]
+> INCREMENT BAR and INCREMENT SLIDER have an `Animate` parameter that INCREMENT ARC does not.
+> This controls whether the value change is animated (`LV_ANIM_ON`) or instant (`LV_ANIM_OFF`).
 
-#### DELETE SCREEN
-Removes a screen from memory.
+#### INCREMENT SLIDER — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "INCREMENT SLIDER",
+  "childs": [
+    { "strtype": "INCREMENT SLIDER/Name", "strval": "INCREMENT SLIDER", "InheritedType": 10 },
+    { "strtype": "INCREMENT SLIDER/Call", "strval": "IncrementSlider( <{Target}>, <{Value}>, LV_ANIM_<{Animate}> )", "InheritedType": 10 },
+    { "strtype": "INCREMENT SLIDER/CallC", "strval": "_ui_slider_increment( <{Target}>, <{Value}>, LV_ANIM_<{Animate}>);", "InheritedType": 10 },
+    { "strtype": "INCREMENT SLIDER/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "INCREMENT SLIDER/Value", "integer": 1, "InheritedType": 6 },
+    { "strtype": "INCREMENT SLIDER/Animate", "strval": "ON", "InheritedType": 3 }
+  ]
+}
+```
+Animate choices: `ON`, `OFF`
+
+#### DELETE SCREEN — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "DELETE SCREEN",
+  "childs": [
+    { "strtype": "DELETE SCREEN/Name", "strval": "DELETE SCREEN" },
+    { "strtype": "DELETE SCREEN/Call", "strval": "DeleteScreen(<{Screen}>)" },
+    { "strtype": "DELETE SCREEN/CallC", "strval": "_ui_screen_delete( &<{Screen}>_screen_destroy);" },
+    { "strtype": "DELETE SCREEN/Screen", "strval": "GUID...", "InheritedType": 9 }
+  ]
+}
+```
 
 #### MODIFY FLAG ✅ confirmed
-Sets or clears a widget flag (e.g., Hidden, Clickable).
-- CallC: `_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);`
-- Parameters: Object (IT=9), Flag (IT=3), Action (IT=3: "ADD"/"REMOVE"/"TOGGLE")
+```json
+{
+  "strtype": "_event/action", "strval": "MODIFY FLAG",
+  "childs": [
+    { "strtype": "MODIFY FLAG/Name", "strval": "MODIFY FLAG", "InheritedType": 10 },
+    { "strtype": "MODIFY FLAG/Call", "strval": "ModifyFlag( <{Object}>, lv.obj.FLAG.<{Flag}>, \"<{Action}>\")", "InheritedType": 10 },
+    { "strtype": "MODIFY FLAG/CallC", "strval": "_ui_flag_modify( <{Object}>, LV_OBJ_FLAG_<{Flag}>, _UI_MODIFY_FLAG_<{Action}>);", "InheritedType": 10 },
+    { "strtype": "MODIFY FLAG/Object", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "MODIFY FLAG/Flag", "strval": "HIDDEN", "InheritedType": 3 },
+    { "strtype": "MODIFY FLAG/Action", "strval": "ADD", "InheritedType": 3 }
+  ]
+}
+```
+Flag choices: `HIDDEN`, `CLICKABLE`, `CHECKABLE`, `PRESS_LOCK`, `CLICK_FOCUSABLE`, `ADV_HITTEST`, `IGNORE_LAYOUT`, `FLOATING`, `EVENT_BUBBLE`, `GESTURE_BUBBLE`, `SNAPPABLE`, `SCROLLABLE`, `SCROLL_ELASTIC`, `SCROLL_MOMENTUM`, `SCROLL_ON_FOCUS`, `SCROLL_CHAIN`, `SCROLL_ONE`
+
+Action choices: `ADD`, `REMOVE`, `TOGGLE`
 
 #### MODIFY STATE ✅ confirmed
-Sets or clears a widget state (e.g., Checked, Disabled).
-- CallC: `_ui_state_modify( <{Object}>, LV_STATE_<{State}>, _UI_MODIFY_STATE_<{Action}>);`
-- Parameters: Object (IT=9), State (IT=3), Action (IT=3: "ADD"/"REMOVE"/"TOGGLE")
+```json
+{
+  "strtype": "_event/action", "strval": "MODIFY STATE",
+  "childs": [
+    { "strtype": "MODIFY STATE/Name", "strval": "MODIFY STATE", "InheritedType": 10 },
+    { "strtype": "MODIFY STATE/Call", "strval": "ModifyState( <{Object}>, lv.STATE.<{State}>, \"<{Action}>\")", "InheritedType": 10 },
+    { "strtype": "MODIFY STATE/CallC", "strval": "_ui_state_modify( <{Object}>, LV_STATE_<{State}>, _UI_MODIFY_STATE_<{Action}>);", "InheritedType": 10 },
+    { "strtype": "MODIFY STATE/Object", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "MODIFY STATE/State", "strval": "CHECKED", "InheritedType": 3 },
+    { "strtype": "MODIFY STATE/Action", "strval": "ADD", "InheritedType": 3 }
+  ]
+}
+```
+State choices: `CHECKED`, `DISABLED`, `PRESSED`, `FOCUSED`, `USER_1`, `USER_2`, `USER_3`, `USER_4`
+
+Action choices: `ADD`, `REMOVE`, `TOGGLE`
 
 #### SET OPACITY ✅ confirmed
-Sets widget opacity.
-- CallC: `_ui_opacity_set( <{Target}>, <{Value}>);`
-- Parameters: Target (IT=9), Value (IT=6)
+```json
+{
+  "strtype": "_event/action", "strval": "SET OPACITY",
+  "childs": [
+    { "strtype": "SET OPACITY/Name", "strval": "SET OPACITY", "InheritedType": 10 },
+    { "strtype": "SET OPACITY/Call", "strval": "set_opacity( <{Target}>, <{Value}>)", "InheritedType": 10 },
+    { "strtype": "SET OPACITY/CallC", "strval": "_ui_opacity_set( <{Target}>, <{Value}>);", "InheritedType": 10 },
+    { "strtype": "SET OPACITY/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "SET OPACITY/Value", "strval": "100", "InheritedType": 6 }
+  ]
+}
+```
 
 #### SLIDER_PROPERTY ✅ confirmed
-Sets a slider property.
-- CallC: `_ui_slider_set_property(<{Target}>, _UI_SLIDER_PROPERTY_<{Property}>, <{Value}>);`
-- Parameters: Target (IT=9), Property (IT=3), Value (IT=10)
+```json
+{
+  "strtype": "_event/action", "strval": "SLIDER_PROPERTY",
+  "childs": [
+    { "strtype": "SLIDER_PROPERTY/Name", "strval": "SLIDER_PROPERTY", "InheritedType": 10 },
+    { "strtype": "SLIDER_PROPERTY/Call", "strval": "SetSliderProperty(<{Target}>, '<{Property}>', <{Value}>)", "InheritedType": 10 },
+    { "strtype": "SLIDER_PROPERTY/CallC", "strval": "_ui_slider_set_property(<{Target}>, _UI_SLIDER_PROPERTY_<{Property}>, <{Value}>);", "InheritedType": 10 },
+    { "strtype": "SLIDER_PROPERTY/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "SLIDER_PROPERTY/Property", "strval": "Value_with_anim", "InheritedType": 3 },
+    { "strtype": "SLIDER_PROPERTY/Value", "strval": "", "InheritedType": 10 }
+  ]
+}
+```
+Property choices: `Value_with_anim`, `Value`
 
-#### INCREMENT BAR
-Same structure as INCREMENT ARC. CallC: `_ui_bar_increment( <{Target}>, <{Value}>);`
+#### KEYBOARD SET TARGET — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "KEYBOARD SET TARGET",
+  "childs": [
+    { "strtype": "KEYBOARD SET TARGET/Name", "strval": "KEYBOARD SET TARGET", "InheritedType": 10 },
+    { "strtype": "KEYBOARD SET TARGET/Call", "strval": "KeyboardSetTarget( <{Keyboard}>,  <{TextArea}>)", "InheritedType": 10 },
+    { "strtype": "KEYBOARD SET TARGET/CallC", "strval": "_ui_keyboard_set_target(<{Keyboard}>,  <{TextArea}>);", "InheritedType": 10 },
+    { "strtype": "KEYBOARD SET TARGET/Keyboard", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "KEYBOARD SET TARGET/TextArea", "strval": "GUID...", "InheritedType": 9 }
+  ]
+}
+```
 
-#### INCREMENT SLIDER
-Same structure as INCREMENT ARC. CallC: `_ui_slider_increment( <{Target}>, <{Value}>);`
+#### MOVE CURSOR — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "MOVE CURSOR",
+  "childs": [
+    { "strtype": "MOVE CURSOR/Name", "strval": "MOVE CURSOR", "InheritedType": 10 },
+    { "strtype": "MOVE CURSOR/Call", "strval": "TextAreaMoveCursor( <{Target}>, \"<{Direction}>\" )", "InheritedType": 10 },
+    { "strtype": "MOVE CURSOR/CallC", "strval": "_ui_textarea_move_cursor( <{Target}>, UI_MOVE_CURSOR_<{Direction}>);", "InheritedType": 10 },
+    { "strtype": "MOVE CURSOR/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "MOVE CURSOR/Direction", "strval": "RIGHT", "InheritedType": 3 }
+  ]
+}
+```
+Direction choices: `UP`, `RIGHT`, `DOWN`, `LEFT`
 
-#### KEYBOARD SET TARGET
-Links a KEYBOARD widget to a TEXTAREA.
-Parameters: Target keyboard (IT=9), Target textarea (IT=9).
+#### STEP SPINBOX — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "STEP SPINBOX",
+  "childs": [
+    { "strtype": "STEP SPINBOX/Name", "strval": "STEP SPINBOX", "InheritedType": 10 },
+    { "strtype": "STEP SPINBOX/Call", "strval": "StepSpinbox( <{Target}>, <{Direction}> )", "InheritedType": 10 },
+    { "strtype": "STEP SPINBOX/CallC", "strval": "_ui_spinbox_step( <{Target}>, <{Direction}>);", "InheritedType": 10 },
+    { "strtype": "STEP SPINBOX/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "STEP SPINBOX/Direction", "strval": "1", "InheritedType": 3 }
+  ]
+}
+```
+Direction choices: `1(INCREMENT)`, `-1(DECREMENT)`
 
-#### MOVE CURSOR
-Moves a text cursor in a TEXTAREA.
-Parameters: Target (IT=9), Direction (IT=3).
-
-#### STEP SPINBOX
-Increments or decrements a SPINBOX.
-Parameters: Target (IT=9), Direction (IT=3: "INCREMENT"/"DECREMENT").
-
-#### SWITCH THEME
-Changes the active theme.
-Parameters: Theme name (IT=10).
+#### SWITCH THEME — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "SWITCH THEME",
+  "childs": [
+    { "strtype": "SWITCH THEME/Name", "strval": "SWITCH THEME", "InheritedType": 10 },
+    { "strtype": "SWITCH THEME/Call", "strval": "SwitchTheme( <{Theme}> )", "InheritedType": 10 },
+    { "strtype": "SWITCH THEME/CallC", "strval": "_ui_switch_theme( <{Theme}> );", "InheritedType": 10 },
+    { "strtype": "SWITCH THEME/Theme", "strval": "", "InheritedType": 10 }
+  ]
+}
+```
 
 #### SET TEXT VALUE FROM ARC ✅ confirmed
-Sets a label's text to the event source arc's value, with optional prefix/postfix.
-- CallC: `_ui_arc_set_text_value( <{Target}>, target, "<{Prefix}>", "<{Postfix}>");`
-- Parameters: Target label (IT=9), Prefix (IT=10), Postfix (IT=10)
+```json
+{
+  "strtype": "_event/action", "strval": "SET TEXT VALUE FROM ARC",
+  "childs": [
+    { "strtype": "SET TEXT VALUE FROM ARC/Name", "strval": "SET TEXT VALUE FROM ARC", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM ARC/Call", "strval": "SetTextValueArc( <{Target}>, target, \"<{Prefix}>\", \"<{Postfix}>\")", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM ARC/CallC", "strval": "_ui_arc_set_text_value( <{Target}>, target, \"<{Prefix}>\", \"<{Postfix}>\");", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM ARC/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "SET TEXT VALUE FROM ARC/Prefix", "strval": "", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM ARC/Postfix", "strval": "", "InheritedType": 10 }
+  ]
+}
+```
 
-> Note: The "source arc" is implicit — it's the widget that triggers the event, not a separate parameter.
+> [!NOTE]
+> The `target` in the Call/CallC template refers to the **event source widget** (the arc/slider/switch
+> that triggered the event), not a separate parameter. `Target` is the label to update.
 
 #### SET TEXT VALUE FROM SLIDER ✅ confirmed
-Sets a label's text to the event source slider's value, with optional prefix/postfix.
-- CallC: `_ui_slider_set_text_value( <{Target}>, target, "<{Prefix}>", "<{Postfix}>");`
-- Parameters: Target label (IT=9), Prefix (IT=10), Postfix (IT=10)
+```json
+{
+  "strtype": "_event/action", "strval": "SET TEXT VALUE FROM SLIDER",
+  "childs": [
+    { "strtype": "SET TEXT VALUE FROM SLIDER/Name", "strval": "SET TEXT VALUE FROM SLIDER", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM SLIDER/Call", "strval": "SetTextValueSlider( <{Target}>, target, \"<{Prefix}>\", \"<{Postfix}>\")", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM SLIDER/CallC", "strval": "_ui_slider_set_text_value( <{Target}>, target, \"<{Prefix}>\", \"<{Postfix}>\");", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM SLIDER/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "SET TEXT VALUE FROM SLIDER/Prefix", "strval": "", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE FROM SLIDER/Postfix", "strval": "", "InheritedType": 10 }
+  ]
+}
+```
 
-#### SET TEXT VALUE WHEN CHECKED
-Sets a label's text based on whether the source widget is in checked state.
-Parameters: Target label (IT=9), Checked text (IT=10), Unchecked text (IT=10).
+#### SET TEXT VALUE WHEN CHECKED — internal_ref confirmed
+```json
+{
+  "strtype": "_event/action", "strval": "SET TEXT VALUE WHEN CHECKED",
+  "childs": [
+    { "strtype": "SET TEXT VALUE WHEN CHECKED/Name", "strval": "SET TEXT VALUE WHEN CHECKED", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE WHEN CHECKED/Call", "strval": "SetTextValueChecked( <{Target}>, target, \"<{On_text}>\", \"<{Off_text}>\")", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE WHEN CHECKED/CallC", "strval": "_ui_checked_set_text_value( <{Target}>, target, \"<{On_text}>\", \"<{Off_text}>\");", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE WHEN CHECKED/Target", "strval": "GUID...", "InheritedType": 9 },
+    { "strtype": "SET TEXT VALUE WHEN CHECKED/On_text", "strval": "", "InheritedType": 10 },
+    { "strtype": "SET TEXT VALUE WHEN CHECKED/Off_text", "strval": "", "InheritedType": 10 }
+  ]
+}
+```
 
 #### Property-Setting Actions
 
@@ -732,7 +909,7 @@ These follow the same pattern as LABEL_PROPERTY but for other widget types:
 |------|-------------|
 | `NONE` | Instant switch |
 | `FADE_ON` | New screen fades in ✅ confirmed |
-| `FADE_IN` | Alias for FADE_ON |
+| `FADE_OUT` | Current screen fades out |
 | `MOVE_LEFT` | Both screens push left ✅ confirmed |
 | `MOVE_RIGHT` | Both screens push right ✅ confirmed |
 | `MOVE_TOP` | Both screens push up |
@@ -741,10 +918,14 @@ These follow the same pattern as LABEL_PROPERTY but for other widget types:
 | `OVER_RIGHT` | New screen slides over from right |
 | `OVER_TOP` | New screen slides over from top |
 | `OVER_BOTTOM` | New screen slides over from bottom |
+| `OUT_LEFT` | Current screen slides out to left |
+| `OUT_RIGHT` | Current screen slides out to right |
+| `OUT_TOP` | Current screen slides out to top |
+| `OUT_BOTTOM` | Current screen slides out to bottom |
 
 ---
 
-## 10. Style States
+## 10. Style States [📖](https://docs.squareline.io/docs/squareline/styles)
 
 Styles are nested inside `Style_*` properties. Multiple states can coexist.
 
@@ -787,7 +968,7 @@ All confirmed from `new01` with style sections added to each widget.
 | BAR | `main`, `indicator` | Like slider without knob |
 | SWITCH | `main`, `indicator`, `knob` | main=track, indicator=on-state, knob=toggle |
 | CHECKBOX | `main`, `bullet` | main=text area, bullet=the tick box |
-| DROPDOWN | `main` | The button; list inherits |
+| DROPDOWN | `main`, `list_main`, `list_selected`, `list_scrollbar` | main=button, list_main=list bg, list_selected=highlighted option, list_scrollbar=scrollbar |
 | ROLLER | `main`, `selected` | main=list bg, selected=highlighted row |
 | TEXTAREA | `main`, `selected`, `cursor` | main=bg, selected=highlight, cursor=blinker |
 | KEYBOARD | `main`, `items` | main=bg, items=individual keys |
@@ -934,7 +1115,7 @@ All confirmed from Panel1 with every attribute set.
 
 ---
 
-## 11. Animations (v1.5 project data)
+## 11. Animations (v1.5 project data) [📖](https://docs.squareline.io/docs/squareline/animations)
 
 ### PROPERTYANIMATION
 
@@ -970,7 +1151,7 @@ Timeline wrapper for property animations:
 
 ---
 
-## 12. Components (`.ecomp`)
+## 12. Components (`.ecomp`) [📖](https://docs.squareline.io/docs/squareline/components)
 
 Same JSON structure as a widget in `.spj`. Represents reusable widget templates.
 
@@ -1034,7 +1215,7 @@ Useful paths inside the SquareLine Studio installation:
 
 | Gap | Priority | How to Fill |
 |-----|----------|-------------|
-| New action Call/CallC templates | Medium | Create each action in SLS and extract exact templates |
+| ~~New action Call/CallC templates~~ | ~~Medium~~ | Resolved — all 24 actions have full JSON blocks from decoded `.internal_ref` descriptors |
 | GRID layout params | Low | Set a Panel to GRID layout in SLS, save, compare |
 | Theme file with actual overrides | Low | Customise a theme in SLS, save |
 | Multi-state style combos | Low | e.g., `"CHECKED|PRESSED"` compound states |
