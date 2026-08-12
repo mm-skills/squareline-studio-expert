@@ -560,20 +560,20 @@ Events are inline children of widget properties:
 | `DEFOCUSED` | Widget loses focus | LVGL |
 | `READY` | Process completed | LVGL |
 | `CANCEL` | Process cancelled | LVGL |
-| `KEY` | Key input received | elojb |
-| `KEY_RIGHT(KEY)` | Right key pressed | elojb |
-| `KEY_LEFT(KEY)` | Left key pressed | elojb |
-| `KEY_UP(KEY)` | Up key pressed | elojb |
-| `KEY_DOWN(KEY)` | Down key pressed | elojb |
-| `KEY_NEXT(KEY)` | Next key (tab) | elojb |
-| `KEY_PREV(KEY)` | Previous key (shift+tab) | elojb |
-| `KEY_ENTER(KEY)` | Enter key pressed | elojb |
-| `KEY_ESC(KEY)` | Escape key pressed | elojb |
-| `EDITED` | Text content modified | elojb |
-| `INSERT` | Text inserted | elojb |
+| `KEY` | Key input received | export |
+| `KEY_RIGHT(KEY)` | Right key pressed | export |
+| `KEY_LEFT(KEY)` | Left key pressed | export |
+| `KEY_UP(KEY)` | Up key pressed | export |
+| `KEY_DOWN(KEY)` | Down key pressed | export |
+| `KEY_NEXT(KEY)` | Next key (tab) | export |
+| `KEY_PREV(KEY)` | Previous key (shift+tab) | export |
+| `KEY_ENTER(KEY)` | Enter key pressed | export |
+| `KEY_ESC(KEY)` | Escape key pressed | export |
+| `EDITED` | Text content modified | export |
+| `INSERT` | Text inserted | export |
 
 > [!NOTE]
-> ✅ = confirmed in SLS example projects. elojb = confirmed from decoded `.elojb` descriptors.
+> ✅ = confirmed in SLS example projects. export = confirmed from exporting and inspecting generated project files.
 > Compound triggers like `CHECKED(VALUE_CHANGED)` and `KEY_RIGHT(KEY)` use SLS-specific
 > naming. The parenthesized suffix indicates the underlying LVGL event type.
 
@@ -594,6 +594,10 @@ Events are inline children of widget properties:
   ]
 }
 ```
+
+> [!NOTE]
+> LVGL 9.5 (SLS 1.6.2) renames the animation enum: `lv.SCR_LOAD_ANIM` → `lv.SCREEN_LOAD_ANIM` (Python),
+> `LV_SCR_LOAD_ANIM_` → `LV_SCREEN_LOAD_ANIM_` (C). Use the v9.5 form for new projects targeting LVGL 9.5.
 
 #### CALL FUNCTION ✅ confirmed
 ```json
@@ -654,7 +658,7 @@ Events are inline children of widget properties:
 }
 ```
 
-#### INCREMENT BAR — elojb confirmed
+#### INCREMENT BAR — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "INCREMENT BAR",
@@ -674,7 +678,7 @@ Animate choices: `ON`, `OFF`
 > INCREMENT BAR and INCREMENT SLIDER have an `Animate` parameter that INCREMENT ARC does not.
 > This controls whether the value change is animated (`LV_ANIM_ON`) or instant (`LV_ANIM_OFF`).
 
-#### INCREMENT SLIDER — elojb confirmed
+#### INCREMENT SLIDER — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "INCREMENT SLIDER",
@@ -690,7 +694,7 @@ Animate choices: `ON`, `OFF`
 ```
 Animate choices: `ON`, `OFF`
 
-#### DELETE SCREEN — elojb confirmed
+#### DELETE SCREEN — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "DELETE SCREEN",
@@ -769,7 +773,7 @@ Action choices: `ADD`, `REMOVE`, `TOGGLE`
 ```
 Property choices: `Value_with_anim`, `Value`
 
-#### KEYBOARD SET TARGET — elojb confirmed
+#### KEYBOARD SET TARGET — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "KEYBOARD SET TARGET",
@@ -783,7 +787,7 @@ Property choices: `Value_with_anim`, `Value`
 }
 ```
 
-#### MOVE CURSOR — elojb confirmed
+#### MOVE CURSOR — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "MOVE CURSOR",
@@ -798,7 +802,7 @@ Property choices: `Value_with_anim`, `Value`
 ```
 Direction choices: `UP`, `RIGHT`, `DOWN`, `LEFT`
 
-#### STEP SPINBOX — elojb confirmed
+#### STEP SPINBOX — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "STEP SPINBOX",
@@ -813,7 +817,7 @@ Direction choices: `UP`, `RIGHT`, `DOWN`, `LEFT`
 ```
 Direction choices: `1(INCREMENT)`, `-1(DECREMENT)`
 
-#### SWITCH THEME — elojb confirmed
+#### SWITCH THEME — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SWITCH THEME",
@@ -860,7 +864,7 @@ Direction choices: `1(INCREMENT)`, `-1(DECREMENT)`
 }
 ```
 
-#### SET TEXT VALUE WHEN CHECKED — elojb confirmed
+#### SET TEXT VALUE WHEN CHECKED — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SET TEXT VALUE WHEN CHECKED",
@@ -1215,7 +1219,7 @@ Useful paths inside the SquareLine Studio installation:
 
 | Gap | Priority | How to Fill |
 |-----|----------|-------------|
-| ~~New action Call/CallC templates~~ | ~~Medium~~ | Resolved — all 24 actions have full JSON blocks from decoded `.elojb` descriptors |
+| ~~New action Call/CallC templates~~ | ~~Medium~~ | Resolved — all 24 actions have full JSON blocks from exporting and inspecting generated project files |
 | GRID layout params | Low | Set a Panel to GRID layout in SLS, save, compare |
 | Theme file with actual overrides | Low | Customise a theme in SLS, save |
 | Multi-state style combos | Low | e.g., `"CHECKED|PRESSED"` compound states |
