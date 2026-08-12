@@ -2,7 +2,7 @@
 
 This document describes the event structure, trigger types, action types, and screen transition fade modes used in SquareLine Studio.
 
-All Call/CallC templates below are verified against decoded `.internal_ref` descriptors from SLS v1.6.1 (LVGL v9).
+All Call/CallC templates below are verified against exporting and inspecting generated project files from SLS v1.6.1 (LVGL v9).
 
 ## Event Structure
 
@@ -37,9 +37,9 @@ Events are inline children of widget properties:
 | `PRESSED` | Immediately on press | ✅ |
 | `RELEASED` | On release | ✅ |
 | `PRESS_LOST` | Press followed by pointer leaving widget | ✅ |
-| `LONG_PRESSED` | After long press threshold | internal_ref |
-| `LONG_PRESSED_REPEAT` | Repeated after long press | internal_ref |
-| `SHORT_CLICKED` | Short click detected | internal_ref |
+| `LONG_PRESSED` | After long press threshold | export |
+| `LONG_PRESSED_REPEAT` | Repeated after long press | export |
+| `SHORT_CLICKED` | Short click detected | export |
 | `VALUE_CHANGED` | Widget value changed | ✅ |
 | `CHECKED(VALUE_CHANGED)` | Checkbox/switch set to checked | ✅ |
 | `UNCHECKED(VALUE_CHANGED)` | Checkbox/switch set to unchecked | ✅ |
@@ -51,24 +51,24 @@ Events are inline children of widget properties:
 | `GESTURE_RIGHT(GESTURE)` | Right swipe gesture | ✅ |
 | `GESTURE_UP(GESTURE)` | Up swipe gesture | ✅ |
 | `GESTURE_DOWN(GESTURE)` | Down swipe gesture | ✅ |
-| `FOCUSED` | Widget gains focus | internal_ref |
-| `DEFOCUSED` | Widget loses focus | internal_ref |
-| `READY` | Process completed | internal_ref |
-| `CANCEL` | Process cancelled | internal_ref |
-| `KEY` | Key input received | internal_ref |
-| `KEY_RIGHT(KEY)` | Right key pressed | internal_ref |
-| `KEY_LEFT(KEY)` | Left key pressed | internal_ref |
-| `KEY_UP(KEY)` | Up key pressed | internal_ref |
-| `KEY_DOWN(KEY)` | Down key pressed | internal_ref |
-| `KEY_NEXT(KEY)` | Next key (tab) | internal_ref |
-| `KEY_PREV(KEY)` | Previous key (shift+tab) | internal_ref |
-| `KEY_ENTER(KEY)` | Enter key pressed | internal_ref |
-| `KEY_ESC(KEY)` | Escape key pressed | internal_ref |
-| `EDITED` | Text content modified | internal_ref |
-| `INSERT` | Text inserted | internal_ref |
+| `FOCUSED` | Widget gains focus | export |
+| `DEFOCUSED` | Widget loses focus | export |
+| `READY` | Process completed | export |
+| `CANCEL` | Process cancelled | export |
+| `KEY` | Key input received | export |
+| `KEY_RIGHT(KEY)` | Right key pressed | export |
+| `KEY_LEFT(KEY)` | Left key pressed | export |
+| `KEY_UP(KEY)` | Up key pressed | export |
+| `KEY_DOWN(KEY)` | Down key pressed | export |
+| `KEY_NEXT(KEY)` | Next key (tab) | export |
+| `KEY_PREV(KEY)` | Previous key (shift+tab) | export |
+| `KEY_ENTER(KEY)` | Enter key pressed | export |
+| `KEY_ESC(KEY)` | Escape key pressed | export |
+| `EDITED` | Text content modified | export |
+| `INSERT` | Text inserted | export |
 
 > [!NOTE]
-> ✅ = confirmed in SLS example projects. internal_ref = confirmed from decoded `.internal_ref` descriptors.
+> ✅ = confirmed in SLS example projects. export = confirmed from exporting and inspecting generated project files.
 > Compound triggers like `CHECKED(VALUE_CHANGED)` and `KEY_RIGHT(KEY)` use SLS-specific
 > naming. The parenthesized suffix indicates the underlying LVGL event type.
 
@@ -91,9 +91,13 @@ Events are inline children of widget properties:
   ]
 }
 ```
+
+> [!NOTE]
+> LVGL 9.5 (SLS 1.6.2) renames the animation enum: `lv.SCR_LOAD_ANIM` → `lv.SCREEN_LOAD_ANIM` (Python),
+> `LV_SCR_LOAD_ANIM_` → `LV_SCREEN_LOAD_ANIM_` (C). Use the v9.5 form for new projects targeting LVGL 9.5.
 Fade_mode choices: `MOVE_LEFT`, `MOVE_RIGHT`, `MOVE_TOP`, `MOVE_BOTTOM`, `OVER_LEFT`, `OVER_RIGHT`, `OVER_TOP`, `OVER_BOTTOM`, `FADE_ON`, `FADE_OUT`, `OUT_LEFT`, `OUT_RIGHT`, `OUT_TOP`, `OUT_BOTTOM`, `NONE`
 
-#### DELETE SCREEN — internal_ref confirmed
+#### DELETE SCREEN — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "DELETE SCREEN",
@@ -140,7 +144,7 @@ Fade_mode choices: `MOVE_LEFT`, `MOVE_RIGHT`, `MOVE_TOP`, `MOVE_BOTTOM`, `OVER_L
 }
 ```
 
-#### SET OPACITY — internal_ref confirmed
+#### SET OPACITY — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SET OPACITY",
@@ -170,7 +174,7 @@ Fade_mode choices: `MOVE_LEFT`, `MOVE_RIGHT`, `MOVE_TOP`, `MOVE_BOTTOM`, `OVER_L
 }
 ```
 
-#### INCREMENT BAR — internal_ref confirmed
+#### INCREMENT BAR — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "INCREMENT BAR",
@@ -190,7 +194,7 @@ Animate choices: `ON`, `OFF`
 > INCREMENT BAR and INCREMENT SLIDER have an `Animate` parameter that INCREMENT ARC does not.
 > This controls whether the value change is animated (`LV_ANIM_ON`) or instant (`LV_ANIM_OFF`).
 
-#### INCREMENT SLIDER — internal_ref confirmed
+#### INCREMENT SLIDER — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "INCREMENT SLIDER",
@@ -208,7 +212,7 @@ Animate choices: `ON`, `OFF`
 
 ### State/Flag Actions
 
-#### MODIFY FLAG — internal_ref confirmed
+#### MODIFY FLAG — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "MODIFY FLAG",
@@ -226,7 +230,7 @@ Flag choices: `HIDDEN`, `CLICKABLE`, `CHECKABLE`, `PRESS_LOCK`, `CLICK_FOCUSABLE
 
 Action choices: `ADD`, `REMOVE`, `TOGGLE`
 
-#### MODIFY STATE — internal_ref confirmed
+#### MODIFY STATE — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "MODIFY STATE",
@@ -246,7 +250,7 @@ Action choices: `ADD`, `REMOVE`, `TOGGLE`
 
 ### Text Display Actions
 
-#### SET TEXT VALUE FROM ARC — internal_ref confirmed
+#### SET TEXT VALUE FROM ARC — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SET TEXT VALUE FROM ARC",
@@ -265,7 +269,7 @@ Action choices: `ADD`, `REMOVE`, `TOGGLE`
 > The `target` in the Call/CallC template refers to the **event source widget** (the arc/slider/switch
 > that triggered the event), not a separate parameter. `Target` is the label to update.
 
-#### SET TEXT VALUE FROM SLIDER — internal_ref confirmed
+#### SET TEXT VALUE FROM SLIDER — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SET TEXT VALUE FROM SLIDER",
@@ -280,7 +284,7 @@ Action choices: `ADD`, `REMOVE`, `TOGGLE`
 }
 ```
 
-#### SET TEXT VALUE WHEN CHECKED — internal_ref confirmed
+#### SET TEXT VALUE WHEN CHECKED — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SET TEXT VALUE WHEN CHECKED",
@@ -297,7 +301,7 @@ Action choices: `ADD`, `REMOVE`, `TOGGLE`
 
 ### Keyboard Actions
 
-#### KEYBOARD SET TARGET — internal_ref confirmed
+#### KEYBOARD SET TARGET — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "KEYBOARD SET TARGET",
@@ -311,7 +315,7 @@ Action choices: `ADD`, `REMOVE`, `TOGGLE`
 }
 ```
 
-#### MOVE CURSOR — internal_ref confirmed
+#### MOVE CURSOR — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "MOVE CURSOR",
@@ -328,7 +332,7 @@ Direction choices: `UP`, `RIGHT`, `DOWN`, `LEFT`
 
 ### Other Actions
 
-#### STEP SPINBOX — internal_ref confirmed
+#### STEP SPINBOX — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "STEP SPINBOX",
@@ -343,7 +347,7 @@ Direction choices: `UP`, `RIGHT`, `DOWN`, `LEFT`
 ```
 Direction choices: `1(INCREMENT)`, `-1(DECREMENT)`
 
-#### SWITCH THEME — internal_ref confirmed
+#### SWITCH THEME — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SWITCH THEME",
@@ -374,7 +378,7 @@ Direction choices: `1(INCREMENT)`, `-1(DECREMENT)`
 ```
 Property choices: `Text`
 
-#### BAR_PROPERTY — internal_ref confirmed
+#### BAR_PROPERTY — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "BAR_PROPERTY",
@@ -390,7 +394,7 @@ Property choices: `Text`
 ```
 Property choices: `Value_with_anim`, `Value`
 
-#### SLIDER_PROPERTY — internal_ref confirmed
+#### SLIDER_PROPERTY — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "SLIDER_PROPERTY",
@@ -406,7 +410,7 @@ Property choices: `Value_with_anim`, `Value`
 ```
 Property choices: `Value_with_anim`, `Value`
 
-#### DROPDOWN_PROPERTY — internal_ref confirmed
+#### DROPDOWN_PROPERTY — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "DROPDOWN_PROPERTY",
@@ -422,7 +426,7 @@ Property choices: `Value_with_anim`, `Value`
 ```
 Property choices: `Selected`
 
-#### IMAGE_PROPERTY — internal_ref confirmed
+#### IMAGE_PROPERTY — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "IMAGE_PROPERTY",
@@ -439,7 +443,7 @@ Property choices: `Selected`
 ```
 Property choices: `Image`, `Angle`, `Zoom`
 
-#### ROLLER_PROPERTY — internal_ref confirmed
+#### ROLLER_PROPERTY — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "ROLLER_PROPERTY",
@@ -455,7 +459,7 @@ Property choices: `Image`, `Angle`, `Zoom`
 ```
 Property choices: `Selected_with_anim`, `Selected`
 
-#### BASIC_PROPERTY — internal_ref confirmed
+#### BASIC_PROPERTY — export confirmed
 ```json
 {
   "strtype": "_event/action", "strval": "BASIC_PROPERTY",
@@ -475,15 +479,15 @@ Property choices: `Position_X`, `Position_Y`, `Width`, `Height`
 
 | Category | Actions | Source |
 |----------|--------|:---:|
-| Navigation | CHANGE SCREEN, DELETE SCREEN | ✅, internal_ref |
+| Navigation | CHANGE SCREEN, DELETE SCREEN | ✅, export |
 | Code | CALL FUNCTION | ✅ |
-| Animation | PLAY ANIMATION, SET OPACITY | ✅, internal_ref |
-| Value Increment | INCREMENT ARC, INCREMENT BAR, INCREMENT SLIDER | ✅, internal_ref, internal_ref |
-| Property Setting | LABEL_PROPERTY, SLIDER_PROPERTY, BAR_PROPERTY, DROPDOWN_PROPERTY, IMAGE_PROPERTY, ROLLER_PROPERTY, BASIC_PROPERTY | ✅, internal_ref |
-| Text Display | SET TEXT VALUE FROM ARC, SET TEXT VALUE FROM SLIDER, SET TEXT VALUE WHEN CHECKED | internal_ref |
-| State/Flag | MODIFY FLAG, MODIFY STATE | internal_ref |
-| Keyboard | KEYBOARD SET TARGET, MOVE CURSOR | internal_ref |
-| Other | STEP SPINBOX, SWITCH THEME | internal_ref |
+| Animation | PLAY ANIMATION, SET OPACITY | ✅, export |
+| Value Increment | INCREMENT ARC, INCREMENT BAR, INCREMENT SLIDER | ✅, export, export |
+| Property Setting | LABEL_PROPERTY, SLIDER_PROPERTY, BAR_PROPERTY, DROPDOWN_PROPERTY, IMAGE_PROPERTY, ROLLER_PROPERTY, BASIC_PROPERTY | ✅, export |
+| Text Display | SET TEXT VALUE FROM ARC, SET TEXT VALUE FROM SLIDER, SET TEXT VALUE WHEN CHECKED | export |
+| State/Flag | MODIFY FLAG, MODIFY STATE | export |
+| Keyboard | KEYBOARD SET TARGET, MOVE CURSOR | export |
+| Other | STEP SPINBOX, SWITCH THEME | export |
 
 ## Screen Transition Fade Modes
 

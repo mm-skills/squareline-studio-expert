@@ -208,7 +208,7 @@ class WidgetBuilder:
     # ------------------------------------------------------------------
 
     def _base_props(self, name, x=0, y=0, w=100, h=50, align="CENTER",
-                    content_fit=False):
+                    content_fit=False, state_trickle=False):
         """
         Generate the 16 mandatory OBJECT/* properties every widget needs.
 
@@ -220,7 +220,7 @@ class WidgetBuilder:
             content_fit: If True, use content-fit sizing (flags=51)
         """
         size_flags = 51 if content_fit else 17
-        return [
+        props = [
             {"nid": 10, "strtype": "OBJECT/Name", "strval": name,
              "InheritedType": 10},
             {"nid": 20, "strtype": "OBJECT/Layout", "InheritedType": 1},
@@ -256,6 +256,14 @@ class WidgetBuilder:
             {"nid": 320, "flags": 1048576, "strtype": "OBJECT/States",
              "InheritedType": 1},
         ]
+
+        if state_trickle:
+            props.append(
+                {"nid": 95, "strtype": "OBJECT/State_trickle",
+                 "strval": "True", "InheritedType": 2}
+            )
+
+        return props
 
     def _style_part(self, prefix, part_name, part_label, nid, childs=None):
         """Create a style part property."""
@@ -435,10 +443,10 @@ class WidgetBuilder:
                 {"nid": n(), "strtype": "CHANGE SCREEN/Name",
                  "strval": "CHANGE SCREEN", "InheritedType": 10},
                 {"nid": n(), "strtype": "CHANGE SCREEN/Call",
-                 "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
+                 "strval": "ChangeScreen( <{Screen_to}>, lv.SCREEN_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
                  "InheritedType": 10},
                 {"nid": n(), "strtype": "CHANGE SCREEN/CallC",
-                 "strval": "_ui_screen_change( &<{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>, &<{Screen_to}>_screen_init);",
+                 "strval": "_ui_screen_change( &<{Screen_to}>, LV_SCREEN_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>, &<{Screen_to}>_screen_init);",
                  "InheritedType": 10},
                 {"nid": n(), "strtype": "CHANGE SCREEN/Screen_to",
                  "strval": target_guid, "InheritedType": 9},
@@ -1381,7 +1389,7 @@ class WidgetBuilder:
         }
 
     def textarea(self, name, text="", placeholder="", max_length=98989898,
-                 one_line=False, password=False, size=(200, 100),
+                 one_line=False, password=False, text_align=None, size=(200, 100),
                  align="CENTER", x_offset=0, y_offset=0, style=None):
         """
         Create a TEXTAREA widget.
@@ -1393,6 +1401,7 @@ class WidgetBuilder:
             max_length: Maximum text length (default: effectively unlimited)
             one_line: Single-line mode
             password: Password masking mode
+            text_align: Text alignment within textarea (v9.5+). Values: 'CENTER', 'TOP_LEFT', 'TOP_MID', 'TOP_RIGHT', 'BOTTOM_LEFT', 'BOTTOM_MID', 'BOTTOM_RIGHT', 'LEFT_MID', 'RIGHT_MID'. Default: None (SLS default is TOP_LEFT).
             size: (width, height)
             align: Alignment
             x_offset, y_offset: Position offset
@@ -1419,6 +1428,12 @@ class WidgetBuilder:
             {"nid": 1070, "strtype": "TEXTAREA/Password_mode",
              "strval": "True" if password else "False", "InheritedType": 2},
         ])
+
+        if text_align:
+            props.append(
+                {"nid": 1075, "strtype": "TEXTAREA/Text_align\n",
+                 "strval": text_align, "InheritedType": 3}
+            )
 
         style_childs = []
         if style:

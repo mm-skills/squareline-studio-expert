@@ -105,11 +105,11 @@ size outside this range requires SLS Font Manager generation.
 → Read `references/format/fonts.md` for the complete font reference.
 
 ### 14. LVGL version determines widget availability and code output
-SLS supports LVGL **v8.3.x** and **v9.x** (9.1, 9.2, 9.3). The LVGL version is set
+SLS supports LVGL **v8.3.x** and **v9.x** (9.1, 9.2, 9.3, 9.5). The LVGL version is set
 by the board's `supported_lvgl_version` field. Key differences:
 - **COLORWHEEL** is v8 only — removed in LVGL 9
 - **CONTAINER** is the LVGL 9 name for PANEL (both work in SLS)
-- Most popular boards (Arduino TFT_eSPI, CrowPanel, MaTouch, M5Stack) now target **v9.3**
+- Most popular boards (Arduino TFT_eSPI, CrowPanel, MaTouch, M5Stack) now target **v9.5** (as of SLS 1.6.2)
 - All 15 bundled SLS examples use **v9.2.2**
 - Default to **v9** for new projects unless the user specifies a v8 board.
 → Read `references/format/lvgl-version-guide.md` for the full version guide.
@@ -119,15 +119,15 @@ The `board` and `board_version` in `.sll` must match an installed `.slb` board
 pack. An unrecognised board string causes SLS to show "Custom Board" and may
 silently **fall back to v8 code generation** on export, even if `lvgl_version`
 is set to v9. Many boards (e.g. `"Arduino with TFT_eSPI"`) have multiple
-versions — v1.x supports v8 only, v2.x supports v9. Use `v2.3.0` for v9
+versions — v1.x supports v8 only, latest board versions target v9.5. Use `v2.3.0` for v9
 projects. For projects without a hardware-specific board, use
 `"CMake/Eclipse/VScode with SDL for development on PC"` (the board used by all
-15 bundled SLS v1.6.1 examples).
+bundled SLS examples).
 
 ### 16. Only use recognised LVGL version strings
-Valid `lvgl_version` values are: `"8.3.11"`, `"9.1.0"`, `"9.2.2"`, `"9.3"`.
+Valid `lvgl_version` values are: `"8.3.11"`, `"9.1.0"`, `"9.2.2"`, `"9.3"`, `"9.5"`.
 Arbitrary strings like `"9.0.0"` are silently accepted by SLS but don't map to
-any export template. Default to `"9.2.2"` for new v9 projects.
+any export template. Default to `"9.5"` for new v9 projects.
 
 ---
 
