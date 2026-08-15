@@ -107,6 +107,15 @@ Flat JSON object. Fields vary between versions.
 > [!IMPORTANT]
 > The `shape` field is `"CIRCLE"` for round displays and `"RECTANGLE"` for standard ones. This affects masking in the editor.
 
+> [!WARNING]
+> **`naming` settings control C export — not canvas-edit name regeneration.**
+> The `naming`, `naming_force_lowercase`, and `naming_add_subcomponent` fields
+> control how exported C variable names are constructed (e.g., `ui_MyButton` vs
+> `ui_Screen1_Panel_MyButton`). They do **not** prevent SLS from stripping
+> underscores from `OBJECT/Name` values when canvas-edited widgets are saved.
+> The underscore stripping is hardcoded in SLS's widget descriptors
+> (`need_separator: false`). See SKILL.md anti-pitfall rule #24.
+
 ---
 
 ## 4. `Themes.slt` — Theme Definitions [📖](https://docs.squareline.io/docs/squareline/themes)

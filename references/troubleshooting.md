@@ -94,6 +94,35 @@ When a generated `.spj` file won't open in SLS or widgets are missing:
 4. **Check `.sll` ↔ `.spj` info consistency** — version, resolution, board must match
 5. **Inspect JSON syntax** — use `python3 -m json.tool < file.spj` to find parse errors
 
+## 4. SLS Canvas-Edit Name Corruption
+
+SLS regenerates `OBJECT/Name` values for widgets that are edited on the canvas
+(moved, resized, restyled) when the project is saved. The regenerated name
+**strips underscores** — e.g., `wsrIdle_temp` → `wsrIdletemp` — because SLS's
+internal naming template concatenates tokens without separators
+(`need_separator: false` in all widget descriptors).
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Firmware compile fails with undefined `ui_<name>` symbols after SLS Save | SLS stripped underscores from canvas-edited widget names | Run `scripts/check_names.py --baseline <file> --fix` to restore names |
+| Widget names lost underscores after Save | SLS name regeneration on "dirty" widgets | Use camelCase naming to avoid the issue entirely |
+| Some widgets on a screen lost underscores, others didn't | Only canvas-edited ("dirty") widgets are regenerated | Only manipulated widgets are affected |
+
+**Prevention:** Use camelCase for all firmware-bound widget names. See
+SKILL.md anti-pitfall rule #24.
+
+**Detection & Recovery:** Use `scripts/check_names.py`:
+```bash
+# Save a baseline before opening in SLS
+python3 scripts/check_names.py /path/to/project/ --save-baseline names.json
+
+# After SLS Save, check for changes
+python3 scripts/check_names.py /path/to/project/ --baseline names.json
+
+# Restore stripped names
+python3 scripts/check_names.py /path/to/project/ --baseline names.json --fix
+```
+
 ## External References
 
 - [SLS Troubleshooting Guide](http://docs.squareline.io/docs/miscellanos/troubleshooting/)
