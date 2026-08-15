@@ -182,6 +182,35 @@ Missing the `.bin` shows placeholder squares in SLS. Missing the `.fcfg` makes S
 not recognise the font at all. Use `scripts/convert_font.py` to generate all three.
 → Read `references/format/fonts.md` for the full custom font workflow.
 
+### 24. SLS strips underscores from canvas-edited widget names on Save
+When you edit a widget on the SLS canvas (move, resize, restyle) and then Save
+(Cmd+S / Ctrl+S), SLS regenerates that widget's `OBJECT/Name` using an internal
+template that **concatenates name segments without underscores** — e.g.,
+`myPanel_status` → `myPanelstatus`. The `need_separator` field in SLS's widget
+descriptors is hardcoded to `false`, and every default name template uses
+CamelCase (`TextArea#`, `ImgButton#`, `TabView#`). There is no per-widget
+"locked name" flag or `.sll` setting to opt out.
+
+This silently breaks any firmware code binding to the exported C symbol
+(`ui_myPanel_status` → `ui_myPanelstatus`). The breakage is invisible in SLS
+previews and only surfaces at firmware compile time as undefined symbols.
+
+**Use camelCase for firmware-bound widget names:**
+- ✅ `wsrIdleTemp`, `wsrSystemQuadHub`, `statusLabel`, `arcProgress`
+- ❌ `wsrIdle_temp`, `wsrSystem_quadHub`, `status_label`, `arc_progress`
+
+CamelCase names survive canvas-edit + Save because SLS's concatenation template
+preserves existing case boundaries. Underscored names are split at underscores
+and re-joined without them.
+
+If you inherit a project with underscored widget names, run
+`scripts/check_names.py` after every SLS Save to detect and restore stripped
+names before exporting or building firmware.
+
+**Not affected:** image asset filenames (`icon_battery.png`), theme color names
+(`dark_blue`), font names (`ui_font_Roboto`). Only `OBJECT/Name` values on
+widgets that SLS marks as "dirty" during a canvas-edit + Save cycle.
+
 ---
 
 ## Core Workflow
@@ -322,6 +351,7 @@ Before delivering generated project files, verify:
 - [ ] `nidcnt` in `.sll` exceeds the highest `nid` used
 - [ ] Every widget has `saved_objtypeKey` set correctly
 - [ ] Every widget has `OBJECT/Name` with a unique name
+- [ ] Widget names use camelCase (no underscores) if firmware binds to them — see pitfall #24
 - [ ] Screen objects have `isPage: true`
 - [ ] Event `Screen_to` values reference valid screen GUIDs
 - [ ] Style property key names match EXACTLY (check spaces and typos)

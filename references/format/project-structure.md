@@ -90,6 +90,13 @@ Flat JSON object. Fields vary between versions.
 > [!IMPORTANT]
 > The `shape` field is `"CIRCLE"` for round displays and `"RECTANGLE"` for standard ones. This affects masking in the editor.
 
+> [!WARNING]
+> **`naming` settings control C export — not canvas-edit name regeneration.**
+> These fields control how exported C/Python variable names are constructed, not
+> how `OBJECT/Name` values are stored in the `.spj`. SLS strips underscores from
+> widget names when canvas-edited widgets are saved (`need_separator: false` is
+> hardcoded). See SKILL.md anti-pitfall rule #24.
+
 ---
 
 ## 4. `Themes.slt` — Theme Definitions

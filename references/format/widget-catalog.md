@@ -12,6 +12,13 @@ All confirmed from `research/new01/` (v1.6.1).
 > for v9 projects. See `references/format/lvgl-version-guide.md` for the full
 > version compatibility table.
 
+> [!WARNING]
+> **Widget names with underscores are not round-trip-safe.** SLS regenerates
+> `OBJECT/Name` for widgets edited on the canvas, stripping underscores
+> (`my_widget` → `mywidget`). Use **camelCase** (`myWidget`) for any widget
+> name that firmware binds to. See SKILL.md anti-pitfall rule #24 and
+> `scripts/check_names.py` for detection/recovery.
+
 ### SCREEN
 | strtype | IT | Description |
 |---------|:---:|---|
