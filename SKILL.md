@@ -104,7 +104,8 @@ default to free-tier limits unless told otherwise.
 SLS ships 21 built-in Montserrat font sizes: **8, 10, 12, 14, 16, 18, 20, 22, 24,
 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48** — even numbers only. Referencing
 `montserrat_56` or `montserrat_13` will produce a "Font is missing" warning. Any
-size outside this range requires SLS Font Manager generation.
+size outside this range requires a custom font — use `scripts/convert_font.py` to
+generate one from a TTF source file using SLS's bundled `lv_font_conv` binary.
 → Read `references/format/fonts.md` for the complete font reference.
 
 ### 14. LVGL version determines widget availability and code output
@@ -170,6 +171,16 @@ The project display name in SLS comes from `info.Name` in the `.spj` (and mirror
 in `.sll` `name` and `project.info` `project_name`). All 5 name fields must be
 consistent and descriptive. The default `"SquareLine_Project"` makes all projects
 indistinguishable in SLS's Recent Projects list and title bar.
+
+### 23. Custom fonts need 3 files: `.c`, `.bin`, AND `.fcfg`
+Every custom font requires three files in `assets/fonts/`:
+- `ui_font_<Name>.c` — LVGL C source (for firmware compilation)
+- `ui_font_<Name>.bin` — binary font (for SLS preview rendering)
+- `ui_font_<Name>.fcfg` — JSON metadata (so SLS recognises the font)
+
+Missing the `.bin` shows placeholder squares in SLS. Missing the `.fcfg` makes SLS
+not recognise the font at all. Use `scripts/convert_font.py` to generate all three.
+→ Read `references/format/fonts.md` for the full custom font workflow.
 
 ---
 
@@ -268,6 +279,7 @@ python3 scripts/validate_project.py /path/to/output/
 | Find image assets for a project | `references/format/image-asset-sources.md` |
 | Check LVGL version compatibility and migration | `references/format/lvgl-version-guide.md` |
 | Build widgets programmatically with a helper API | `scripts/widget_helpers.py` |
+| Convert a TTF font to SLS custom font files (.c, .bin, .fcfg) | `scripts/convert_font.py` |
 | Debug SLS crashes, LVGL runtime errors, or project load failures | `references/troubleshooting.md` |
 | Report a bug or defect in the skill | `references/issue-management.md` |
 | Contribute a fix or propose an enhancement | `references/contribution-protocol.md` |
