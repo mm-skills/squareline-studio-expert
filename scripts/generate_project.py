@@ -211,9 +211,25 @@ def generate_project_info(project_name, editor_version):
     }
 
 
+def generate_slp():
+    """Generate the .slp export paths file with safe empty defaults."""
+    return {
+        "uiExportFolderPath": "",
+        "projectExportFolderPath": "",
+        "drive_stdio": "-",
+        "drive_stdio_path": "",
+        "drive_posix": "-",
+        "drive_posix_path": "",
+        "drive_win32": "-",
+        "drive_win32_path": "",
+        "drive_fatfs": "-",
+        "drive_fatfs_path": "",
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Generate SquareLine Studio project scaffold")
-    parser.add_argument("--name", default="SquareLine_Project", help="Project name")
+    parser.add_argument("--name", required=True, help="Project name (used in filenames and SLS display)")
     parser.add_argument("--width", type=int, default=480, help="Display width")
     parser.add_argument("--height", type=int, default=320, help="Display height")
     parser.add_argument("--shape", default="RECTANGLE", choices=["RECTANGLE", "CIRCLE"],
@@ -250,6 +266,7 @@ def main():
                         args.shape, nidcnt)
     slt = generate_slt()
     info = generate_project_info(args.name, args.editor_version)
+    slp = generate_slp()
 
     # Write files
     with open(os.path.join(args.output, f"{args.name}.spj"), "w") as f:
@@ -264,11 +281,14 @@ def main():
     with open(os.path.join(args.output, "project.info"), "w") as f:
         json.dump(info, f, indent=4)
 
+    with open(os.path.join(args.output, f"{args.name}.slp"), "w") as f:
+        json.dump(slp, f, indent=2)
+
     print(f"✅ Project generated at: {args.output}")
     print(f"   Screens: {', '.join(screen_names)}")
     print(f"   Display: {args.width}x{args.height} ({args.shape})")
     print(f"   Board: {args.board}")
-    print(f"   Files: {args.name}.spj, {args.name}.sll, Themes.slt, project.info")
+    print(f"   Files: {args.name}.spj, {args.name}.sll, {args.name}.slp, Themes.slt, project.info")
 
 
 if __name__ == "__main__":
