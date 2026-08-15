@@ -81,13 +81,16 @@ Every event action has `Call` (MicroPython template) and `CallC` (C template) fi
 containing placeholder patterns like `<{Screen_to}>`. These are used for code generation
 and must match the action type exactly. Copy the templates from the reference.
 
-### 11. Dropdown/Roller options use literal \n, NOT real newlines
-Options in `DROPDOWN/Options` and `ROLLER/Options` are separated by the **two-character
-sequence** `\n` (backslash + n), NOT actual newline characters. SLS generates Python code
-from these strings, and real newlines cause `SyntaxError: invalid syntax`.
+### 11. ALL text fields use literal \n, NOT real newlines
+Text in `LABEL/Text`, `DROPDOWN/Options`, `ROLLER/Options`, `TEXTAREA/Text`,
+`TEXTAREA/Placeholder`, `CHECKBOX/Title`, and `DROPDOWN/Base_text` must use the
+**two-character sequence** `\n` (backslash + n) for line breaks, NOT actual newline
+characters (0x0A). SLS's code generator passes `strval` directly into string literals.
+A real newline breaks the JSON and/or produces `SyntaxError: invalid syntax` in the
+generated Python code.
 ```
-✅ "Option 1\\nOption 2\\nOption 3"   ← correct (literal \n in JSON)
-❌ "Option 1\nOption 2\nOption 3"     ← BREAKS SLS code generation
+✅ "Line 1\\nLine 2"   ← correct (literal \n in JSON)
+❌ "Line 1\nLine 2"     ← BREAKS JSON and SLS code generation
 ```
 
 ### 12. Free-tier projects have strict size limits
@@ -128,6 +131,45 @@ bundled SLS examples).
 Valid `lvgl_version` values are: `"8.3.11"`, `"9.1.0"`, `"9.2.2"`, `"9.3"`, `"9.5"`.
 Arbitrary strings like `"9.0.0"` are silently accepted by SLS but don't map to
 any export template. Default to `"9.5"` for new v9 projects.
+
+### 17. Alignment values have NO prefix
+The `OBJECT/Align` property uses short-form values: `CENTER`, `TOP_LEFT`, `TOP_MID`,
+`TOP_RIGHT`, `BOTTOM_LEFT`, `BOTTOM_MID`, `BOTTOM_RIGHT`, `LEFT_MID`, `RIGHT_MID`.
+Never add an `ALIGN_` prefix — the code template adds `LV_ALIGN_` (C) or `lv.ALIGN.`
+(Python) automatically. Using `ALIGN_CENTER` produces `LV_ALIGN_ALIGN_CENTER` which
+doesn't exist in LVGL.
+
+### 18. Theme color names must be valid C identifiers
+Custom color names defined in `Themes.slt` become variable names in exported code.
+Use only alphanumeric characters and underscores (e.g., `dark_blue`, not `dark-blue`).
+Hyphens cause compilation errors. The default theme must be named `"Default"` — SLS
+generates `UI_THEME_DEFAULT` from this name.
+
+### 19. Widget visibility uses OBJECT/Hidden, not OBJ_FLAG_HIDDEN
+To set a widget's initial visibility in the `.spj`, use `OBJECT/Hidden` with
+`InheritedType: 2` and `strval: "True"` or `"False"`. Do NOT use `OBJ_FLAG_HIDDEN` —
+that is an LVGL runtime constant, not an SLS project property. SLS's code generator
+maps `Hidden: True` → `lv_obj_add_flag(obj, LV_OBJ_FLAG_HIDDEN)` in the export.
+Exception: TABPAGE widgets use `TABPAGE/Hidden` instead of `OBJECT/Hidden`.
+
+### 20. Every widget MUST include its Style_* part nodes
+SLS requires every widget to have its type-specific `Style_*` properties — even if
+no styles are customised. Missing Style_* nodes cause a NullReferenceException in SLS.
+See the complete catalogue in `references/format/widget-catalog.md`. The
+`widget_helpers.py` builder adds these automatically.
+
+### 21. Clear .slp export paths when copying or scaffolding projects
+The `.slp` file contains `uiExportFolderPath` and `projectExportFolderPath` which
+store absolute filesystem paths from the last export. When copying or scaffolding a
+project, these MUST be set to `""` (empty string) to prevent SLS from silently
+exporting to the previous user's filesystem location. Even SLS's own shipped examples
+have this bug (EV_Charger_1280x800 ships with a stale Windows path).
+
+### 22. Project name must be set — don't leave it as "SquareLine_Project"
+The project display name in SLS comes from `info.Name` in the `.spj` (and mirrors
+in `.sll` `name` and `project.info` `project_name`). All 5 name fields must be
+consistent and descriptive. The default `"SquareLine_Project"` makes all projects
+indistinguishable in SLS's Recent Projects list and title bar.
 
 ---
 
