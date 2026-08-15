@@ -21,6 +21,38 @@ import sys
 
 class Validator:
     BUILTIN_MONTSERRAT_SIZES = {str(i) for i in range(8, 50, 2)}
+    VALID_ALIGNS = {
+        'CENTER', 'TOP_LEFT', 'TOP_MID', 'TOP_RIGHT', 'BOTTOM_LEFT',
+        'BOTTOM_MID', 'BOTTOM_RIGHT', 'LEFT_MID', 'RIGHT_MID'
+    }
+    NEWLINE_CHECK_TYPES = {
+        'LABEL/Text', 'DROPDOWN/Options', 'DROPDOWN/Base_text', 'ROLLER/Options',
+        'TEXTAREA/Text', 'TEXTAREA/Placeholder', 'CHECKBOX/Title'
+    }
+    REQUIRED_STYLE_PARTS = {
+        'ARC': ['Style_main', 'Style_indicator', 'Style_knob'],
+        'BAR': ['Style_main', 'Style_indicator'],
+        'BUTTON': ['Style_main'],
+        'CALENDAR': ['Style_main', 'Style_items'],
+        'CHART': ['Style_bg', 'Style_indicator', 'Style_items', 'Style_scrollbar', 'Style_ticks'],
+        'CHECKBOX': ['Style_main', 'Style_bullet'],
+        'CONTAINER': ['Style_main', 'Style_scrollbar'],
+        'DROPDOWN': ['Style_main', 'Style_indicator', 'Style_list_main', 'Style_list_scrollbar', 'Style_list_selected'],
+        'IMAGE': ['Style_main'],
+        'IMGBUTTON': ['Style_main'],
+        'KEYBOARD': ['Style_main', 'Style_items'],
+        'LABEL': ['Style_main'],
+        'PANEL': ['Style_main', 'Style_scrollbar'],
+        'ROLLER': ['Style_main', 'Style_selected'],
+        'SCREEN': ['Style_main', 'Style_scrollbar'],
+        'SLIDER': ['Style_main', 'Style_indicator', 'Style_knob'],
+        'SPINBOX': ['Style_main', 'Style_cursor'],
+        'SPINNER': ['Style_main', 'Style_indicator'],
+        'SWITCH': ['Style_main', 'Style_indicator', 'Style_knob'],
+        'TABVIEW': ['Style_main', 'Style_buttons_main', 'Style_buttons_items'],
+        'TABPAGE': ['Style_main', 'Style_scrollbar'],
+        'TEXTAREA': ['Style_main', 'Style_cursor', 'Style_placeholder', 'Style_selected'],
+    }
 
     def __init__(self, project_dir):
         self.project_dir = project_dir
@@ -121,16 +153,42 @@ class Validator:
             objtype = obj.get("saved_objtypeKey")
             if objtype and objtype != "STARTEVENTS":
                 has_name = False
+                style_parts_found = set()
+                
                 for prop in obj.get("properties", []):
                     st = prop.get("strtype", "")
+                    val = prop.get("strval", "")
+                    
                     if st == "OBJECT/Name" or st == "TABPAGE/Name":
                         has_name = True
+
+                    if "OBJ_FLAG_HIDDEN" in st:
+                        self.error(f"Widget at {path} uses LVGL constant OBJ_FLAG_HIDDEN. Use OBJECT/Hidden instead.")
+
+                    if st.endswith("/Align"):
+                        if isinstance(val, str) and val.startswith("ALIGN_"):
+                            self.error(f"Widget at {path} has invalid alignment '{val}' (starts with ALIGN_)")
+                        elif val and val not in self.VALID_ALIGNS:
+                            self.error(f"Widget at {path} has invalid alignment '{val}'")
+
+                    if st in self.NEWLINE_CHECK_TYPES:
+                        if isinstance(val, str) and '\n' in val:
+                            self.error(f"Widget at {path} has unescaped newline in {st}. Should be literal \\\\n")
+
+                    for part in self.REQUIRED_STYLE_PARTS.get(objtype, []):
+                        if st.endswith(f"/{part}"):
+                            style_parts_found.add(part)
 
                 if not has_name:
                     self.error(f"Widget at {path} has no OBJECT/Name property")
 
                 if objtype == "SCREEN" and not obj.get("isPage"):
                     self.warn(f"Screen at {path} missing isPage: true")
+                    
+                if objtype in self.REQUIRED_STYLE_PARTS:
+                    for req_part in self.REQUIRED_STYLE_PARTS[objtype]:
+                        if req_part not in style_parts_found:
+                            self.error(f"Widget at {path} ({objtype}) is missing required style part '{req_part}'")
 
             for i, child in enumerate(obj.get("children", [])):
                 child_name = ""
@@ -232,7 +290,27 @@ class Validator:
         # Load and validate JSON
         spj_data = self.check_json_valid(spj_name)
         sll_data = self.check_json_valid(sll_name) if sll_name else None
-        self.check_json_valid("Themes.slt")
+        slt_data = self.check_json_valid("Themes.slt")
+
+        if spj_data:
+            if spj_data.get("info", {}).get("Name") == "SquareLine_Project":
+                self.warn("Project Name is 'SquareLine_Project' (default)")
+
+        if slt_data:
+            deftheme = slt_data.get("deftheme", {})
+            if deftheme.get("name") != "Default":
+                self.warn(f"Themes.slt deftheme.name is '{deftheme.get('name')}', should be 'Default'")
+
+        slp_files = [f for f in os.listdir(self.project_dir) if f.endswith('.slp')]
+        if not slp_files:
+            self.warn("No .slp file found (generate_project.py should create it)")
+        else:
+            slp_data = self.check_json_valid(slp_files[0])
+            if slp_data:
+                ui_path = slp_data.get("uiExportFolderPath", "")
+                proj_path = slp_data.get("projectExportFolderPath", "")
+                if ui_path or proj_path:
+                    self.warn(f"{slp_files[0]} contains non-empty export paths which may be stale. uiExportFolderPath='{ui_path}', projectExportFolderPath='{proj_path}'")
 
         if not spj_data:
             return False
